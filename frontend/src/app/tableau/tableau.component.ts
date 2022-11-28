@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { monTab } from '../models/donnes-tab.model';
-import { UserServices } from '../services/user.service';
 
 @Component({
   selector: 'app-tableau',
@@ -8,14 +6,12 @@ import { UserServices } from '../services/user.service';
   styleUrls: ['./tableau.component.scss']
 })
 export class TableauComponent implements OnInit {
-  @Input() tab!: monTab;
 
-  donnees!: monTab[];
 
-  constructor(private UserService: UserServices){}
+  constructor(){}
   
   ngOnInit(){
-    this.donnees = this.UserService.getAllDonnes();
+
   };
 }
 
