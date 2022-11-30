@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { RechercheComponent } from './recherche/recherche.component';
-import { PaginationComponent } from './pagination/pagination.component';
-import { PageAdminComponent } from './page-admin/page-admin.component';
-import { PageUserComponent } from './page-user/page-user.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { InscriptionComponent } from './inscription/inscription.component';
-import { ModifierComponent } from './modifier/modifier.component';
-import { TableauComponent } from './tableau/tableau.component';
+import { HeaderComponent } from './component/header/header.component';
+import { RechercheComponent } from './component/recherche/recherche.component';
+import { PaginationComponent } from './component/pagination/pagination.component';
+import { PageAdminComponent } from './component/page-admin/page-admin.component';
+import { PageUserComponent } from './component/page-user/page-user.component';
+import { ConnexionComponent } from './component/connexion/connexion.component';
+import { InscriptionComponent } from './component/inscription/inscription.component';
+import { ModifierComponent } from './component/modifier/modifier.component';
+import { TableauComponent } from './component/tableau/tableau.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { TableauComponent } from './tableau/tableau.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
