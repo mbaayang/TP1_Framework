@@ -17,7 +17,7 @@ export class TableauComponent implements OnInit {
 
   
   ngOnInit(){
- this.UserService.getAllDonnes().subscribe((donnee: monTab[])=> {
+ this.UserService.getAllUser().subscribe((donnee: monTab[])=> {
   this.donnees=[...donnee]
  })
 

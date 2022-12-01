@@ -5,7 +5,9 @@ const objectShema = new mongoose.Schema({
     nom:{type: String, required: true},
     email:{type: String, required: true},
     tel:{type: Number, required: true},
-/*     role:{type: String, required: true}, */
+    role:{type: String, required: true},
+    imageUrl:{type: String},
+    password:{type: String | Number}
 });
 
 module.exports = mongoose.model('personnes', objectShema); 

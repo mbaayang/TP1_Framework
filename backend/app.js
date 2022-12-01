@@ -2,7 +2,7 @@
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const Object = require('./models/object');
+const userRoutes = require('./routes/users')
 
 mongoose.connect('mongodb+srv://mbayang:mbayang07@cluster0.tzug7mq.mongodb.net/User?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -21,20 +21,6 @@ mongoose.connect('mongodb+srv://mbayang:mbayang07@cluster0.tzug7mq.mongodb.net/U
 
   app.use(bodyParser.json());
 
-  app.post('/Users',(req, res, next) => {
-    const users = new Object({
-      ...req.body
-    });
-    users.save()
-    .then(()=> res.status(201).json({message: 'Inscription réussi !'}))
-    .catch(error => res.status(400).json({error}));
-}); 
-
-  app.use('/Users',(req, res, next) => {
-    Object.find()
-    .then(users => res.status(200).json(users))
-    .catch(error => res.status(400).json({error}));
-    console.log(Object);
-});  
+  app.use('/Users', userRoutes);
 
 module.exports = app; 
