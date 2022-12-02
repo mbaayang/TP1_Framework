@@ -5,7 +5,7 @@ import { monTab } from "../models/donnes-tab.model";
 import { User } from "../models/user";
 
 
-const baseUrl = 'http://localhost:3000/Users/add';
+const baseUrl = 'http://localhost:3000/api/Users';
 
 @Injectable({
     providedIn: 'root'
@@ -18,10 +18,10 @@ export class UserServices{
         return this.http.get<monTab[]>(baseUrl);
       }
 
-      createUser(data: any): Observable<any>{
+/*       createUser(data: any): Observable<any>{
         return this.http.post(baseUrl, data);
 
-      }
+      } */
 
 
   addUser(user: User) {

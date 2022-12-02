@@ -21,6 +21,6 @@ mongoose.connect('mongodb+srv://mbayang:mbayang07@cluster0.tzug7mq.mongodb.net/U
 
   app.use(bodyParser.json());
 
-  app.use('/Users', userRoutes);
+  app.use('/api/Users', userRoutes);
 
 module.exports = app; 

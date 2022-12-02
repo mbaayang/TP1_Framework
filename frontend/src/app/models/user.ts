@@ -1,12 +1,10 @@
-export interface User{
-  
+export interface User{ 
+    nom? : String;
     prenom?:String;
+    email?: String;
+    role?: String;
     imageUrl?:any;
-    tel?:number;
     password?:String | Number;
     passwordConfirm?: String | Number;
-    email?: String;
-    nom? : String;
-    role?: String;
 
 }
