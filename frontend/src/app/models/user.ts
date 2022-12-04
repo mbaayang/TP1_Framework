@@ -7,5 +7,5 @@ export interface User{
     imageUrl?:any;
     password?:String | Number;
     passwordConfirm?: String | Number;
-
+    etat?: Boolean
 }

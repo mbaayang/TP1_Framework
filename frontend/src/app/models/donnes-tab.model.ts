@@ -1,11 +1,11 @@
 export class monTab{
-    id?: any;
+    _id?: String;
     prenom!:string;
     nom!:string;
     email!:string;
     role!:String;
     imageUrl!:String;
-    tel!:number;
     password!:String | Number;
     passwordConfirm!: String | Number;
+    etat!: Boolean
 }

@@ -3,3 +3,9 @@
     margin-left: 12%;
     margin-right: 12%;
 }
+.bi{
+    cursor: pointer;
+}
+.pagination::ng-deep .ngx-pagination .current{
+    background: #e493a3;
+} 

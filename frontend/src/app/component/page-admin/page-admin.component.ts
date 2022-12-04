@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserServices } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-page-admin',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageAdminComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(
+    private userService: UserServices) { }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders,HttpErrorResponse, } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { monTab } from "../models/donnes-tab.model";
 import { User } from "../models/user";
-
 
 const baseUrl = 'http://localhost:3000/api/Users';
 
@@ -18,13 +17,12 @@ export class UserServices{
         return this.http.get<monTab[]>(baseUrl);
       }
 
-/*       createUser(data: any): Observable<any>{
-        return this.http.post(baseUrl, data);
+      addUser(user: User) {
+        return this.http.post<User>(baseUrl, user);
+      } 
 
-      } */
+       deleteUser(id: any): Observable<any> {
+        return this.http.delete(`${baseUrl}/${id}`);
+      }  
 
-
-  addUser(user: User) {
-    return this.http.post<User>(baseUrl, user);
-  }
 }

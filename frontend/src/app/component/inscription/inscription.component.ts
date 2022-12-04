@@ -10,11 +10,12 @@ import { UserServices } from 'src/app/services/user.service';
 export class InscriptionComponent implements OnInit {
   registerForm!:FormGroup;
   title = 'angularvalidate';
-
+/*   message: Boolean = false;
+ */
   submitted=false;
 
   constructor(private formBuilder:FormBuilder,
-              private userService: UserServices ){
+              private userService: UserServices){
 
   }
 
@@ -23,7 +24,6 @@ export class InscriptionComponent implements OnInit {
       nom:['',Validators.required],
       prenom:['',Validators.required],
       role:['',Validators.required],
-      imageUrl:['',Validators.required],
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(8)]],
       
@@ -32,6 +32,7 @@ export class InscriptionComponent implements OnInit {
 
    listDeroulant=['admin','user'];
 
+   
    onSubmit(){
     this.submitted = true
     
@@ -51,6 +52,9 @@ export class InscriptionComponent implements OnInit {
       password: this.registerForm.value.password,
       passwordConfirm: this.registerForm.value.passwordConfirm
     }
+
+/*     this.message = true; */
+    this.registerForm.reset();
 
      this.userService.addUser(data).subscribe(
       data =>{

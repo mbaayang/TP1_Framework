@@ -4,15 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { RechercheComponent } from './component/recherche/recherche.component';
-import { PaginationComponent } from './component/pagination/pagination.component';
 import { PageAdminComponent } from './component/page-admin/page-admin.component';
 import { PageUserComponent } from './component/page-user/page-user.component';
 import { ConnexionComponent } from './component/connexion/connexion.component';
 import { InscriptionComponent } from './component/inscription/inscription.component';
 import { ModifierComponent } from './component/modifier/modifier.component';
 import { TableauComponent } from './component/tableau/tableau.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     TableauComponent,
     RechercheComponent,
-    PaginationComponent,
     PageAdminComponent,
     PageUserComponent,
     ConnexionComponent,
@@ -30,8 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

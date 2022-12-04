@@ -1,5 +1,8 @@
-<body style="background-color:  #e493a3; height: 683px;">
-    <div class="container w-50">
+<body>
+    <div class="container w-50 my-5">
+<!--         <div *ngIf="message" class="alert alert-success">
+            <strong>Succès</strong> inscription réussie !
+        </div> -->
         <form (submit)="saveUsers()" [formGroup]="registerForm" id="leform" class="row g-3 my-5" action="/api/Users">
             <h2 class="text-center">S'inscrire</h2>
             <div class=" col-md-6">
@@ -90,56 +93,8 @@
             </div>
            
             <div class="form-group">
-                <button (click)="onSubmit()" class="btn btn-outline-danger">S'inscrire</button>
+                <button [disabled]="registerForm.invalid" (click)="onSubmit()" class="btn btn-outline-danger">S'inscrire</button>
             </div>
         </form>
     </div>
 </body>
-
-<!-- <form class="row g-3" method="POST" action="/Users/add" enctype="multipart/form-data">
-    <h2>S'inscrire</h2>
-    <div class="col-md-6">
-        <label for="nom" class="form-label">Nom</label>
-        <input type="text" class="form-control" id="nom" name="nom" placeholder=" Nom" autocomplete="on">
-        
-    </div>
-    <div class="col-md-6">
-        <label for="prenom" class="form-label">Prenom</label>
-        <input type="text" class="form-control" id="prenom" name="prenom" placeholder=" Prenom" autocomplete="on">
-        
-    </div>
-    <div class="col-md-6">
-        <label for="email" class="form-label">Adresse email</label>
-        <input type="email" class="form-control" id="Email" name="email" placeholder="Adresse email" autocomplete="on">
-        
-    </div>
-    <div class="col-md-6">
-        <label for="rôle" class="form-label">Rôle</label>
-        <select name="rôle" id="role" class="form-select">
-        <option selected></option>
-        <option value="Administrateur">Administrateur</option>
-        <option value="Utilisateur">Utilisateur</option>
-        </select>
-        
-    </div>
-    <div class="col-md-6">
-        <label for="passwords" class="form-label">Mot de passe</label>
-        <input type="password" class="form-control" id="mdp1" name="passwords" placeholder="Mot de passe" autocomplete="off">
-        
-    </div>
-    <div class="col-md-6">
-        <label for="password_retype" class="form-label">Ressaisissez le mot de passe</label>
-        <input type="password" name="password_retype" class="form-control" id="mdp2" placeholder="Ressaisissez le mot de passe" autocomplete="off">
-        
-    </div>
-    <div class="col-md-6">
-        <label for="photo" class="form-label">Photo</label>
-        <input type="file" class="form-control" id="photo" name="photo">
-    </div>
-    <div class="col-8">
-        <button type="submit" class="btn btn-primary mb-3" name="submit">S'inscrire</button>
-    </div>    
-    <div class="col-4">
-        <p><a href=""> Se connecter ? </a></p>
-    </div>         
-</form> -->
