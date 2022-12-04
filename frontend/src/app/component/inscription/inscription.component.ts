@@ -30,7 +30,7 @@ export class InscriptionComponent implements OnInit {
     })
   }
 
-   listDeroulant=['admin','user'];
+   listDeroulant=['Administrateur','Utilisateur'];
 
    
    onSubmit(){

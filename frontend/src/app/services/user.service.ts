@@ -17,6 +17,10 @@ export class UserServices{
         return this.http.get<monTab[]>(baseUrl);
       }
 
+      getUser(id: any): Observable<monTab> {
+        return this.http.get<monTab>(`${baseUrl}/${id}`);
+      } 
+
       addUser(user: User) {
         return this.http.post<User>(baseUrl, user);
       } 
@@ -25,4 +29,7 @@ export class UserServices{
         return this.http.delete(`${baseUrl}/${id}`);
       }  
 
+      updateUser(id: any, user: User): Observable<any> {
+        return this.http.put(`${baseUrl}/${id}`, user);
+      }
 }

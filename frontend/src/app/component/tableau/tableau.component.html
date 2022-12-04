@@ -21,8 +21,8 @@
             <td>{{ donnee.role }}</td>
             <td>
                 <button class="btn link" (click)="deleteUser(donnee._id, i)"><i class="bi bi-archive"></i></button>
-                <button class="btn link" ><i class="bi bi-pencil-square"></i></button>
-                <button class="btn link"><i class="bi bi-arrow-down-up"></i></button>
+                <button class="btn link" data-toggle="modal" data-target="#modifier" ><i class="bi bi-pencil-square"></i></button>
+                <button class="btn link"><i class="bi bi-arrow-left-right"></i></button>
             </td>
         </tr>
     </tbody>

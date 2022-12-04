@@ -7,5 +7,4 @@ export class monTab{
     imageUrl!:String;
     password!:String | Number;
     passwordConfirm!: String | Number;
-    etat!: Boolean
 }

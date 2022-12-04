@@ -27,6 +27,5 @@ export class ConnexionComponent {
       if(this.registerForm.invalid){
         return
       }
-      alert("Success")
     }
   }
