@@ -1,4 +1,4 @@
-export class monTab{
+export class User{
     _id?: any;
     prenom!:string;
     nom!:string;

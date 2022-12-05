@@ -1,22 +1,31 @@
-<div class="w-100 d-flex justify-content-center mt-5">
-  <form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="d-flex justify-content-center p-4 bg-info" style="display: flex;flex-direction:column;gap:20px;position: absolute;border-radius: 20px;">
-    <input type="text" formControlName="id"  hidden>
-  <div class="mb-3">
-    <label for="prenom" class="form-label">PRENOM</label>
-    <input type="text" class="form-control" formControlName="prenom">
+<app-header></app-header>
+<app-tableau></app-tableau>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modifier</h5>
+               </div>
+                  <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+                          <label for='prenom'>Prenom</label>
+                          <input type="text" formControlName="prenom" class="form-control">
+                          <br />
+                          <label for='nom'>Nom</label>
+                          <input type="text" formControlName="nom" class="form-control">
+                          <br />
+                          <label for='email'>Adresse email</label>
+                          <input type="email" formControlName="email" class="form-control">
+                          <br />
+                          <button type="submit" class="btn btn-success">Sauvegarder</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+          </div>
+      </div>
   </div>
-
-  <div class="mb-3">
-    <label for="nom" class="form-label">NOM</label>
-    <input type="text" class="form-control"  formControlName="nom"  aria-describedby="emailHelp">
-
-  </div>
-
-  <div class="mb-3">
-      <label class="form-label" for="email">EMAIL</label>
-    <input type="email" class="form-control" formControlName="email">
-
-  </div>
-  <button type="submit" class="btn btn-primary">MODIFIER</button>
-</form>
-</div>

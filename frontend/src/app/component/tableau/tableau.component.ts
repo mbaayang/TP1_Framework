@@ -1,6 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -14,9 +14,8 @@ export class TableauComponent implements OnInit {
 
   Users:any = [];
 
-  constructor(private UserService: UserService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone) {
+  constructor(private UserService: UserService) {}
 
-     }
   ngOnInit(): void {
     this.UserService.GetUsers().subscribe(res => {
       console.log(res)
@@ -34,7 +33,7 @@ export class TableauComponent implements OnInit {
 
 
   changeRole=(id:any,role:any)=> {
-    role == "Admin" ? role ="User": role = "Admin"
+    role == "Administrateur" ? role ="Utilisateur": role = "Administrateur"
 
     const user ={
      role : role
@@ -46,7 +45,6 @@ export class TableauComponent implements OnInit {
         this.ngOnInit();
       });
    }
-
 
 }
 

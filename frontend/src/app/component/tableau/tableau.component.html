@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <!-- <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Search..."
-      [(ngModel)]="filterTerm"
-    />
-  </div> -->
 
   <table class="table table-hover w-75 my-5">
     <thead>
@@ -33,16 +16,45 @@
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
             <td>
-                <i class="bi bi-archive" (click)="delete(donnee._id, i)"></i>
-                <i class="bi bi-pencil-square m-2" routerLink="/modif/{{donnee._id}}"></i>
-                <i class="bi bi-arrow-down-up" (click)="changeRole(donnee._id, donnee.role)"></i>
+              <button class="btn link" (click)="delete(donnee._id, i)">
+                <i class="bi bi-archive"></i>
+              </button>
+              <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="btn link" (click)="changeRole(donnee._id, donnee.role)">
+                <i class="bi bi-arrow-left-right" ></i>
+              </button>
             </td>
         </tr>
     </tbody>
   </table>
 
 
-
-
-</body>
-</html>
+<!-- Modal -->
+<!-- <div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modifier</h5>
+               </div>
+                  <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+                          <label for='prenom'>Prenom</label>
+                          <input type="text" id="" name="prenom" class="form-control" value="">
+                          <br />
+                          <label for='nom'>Nom</label>
+                          <input type="text" name="nom" class="form-control" value="">
+                          <br />
+                          <label for='email'>Adresse email</label>
+                          <input type="email" name="email" class="form-control" value="">
+                          <br />
+                          <button type="submit" class="btn btn-success">Sauvegarder</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+          </div>
+      </div>
+  </div> -->

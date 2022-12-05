@@ -1,19 +1,28 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const app = express();
 const userRoute = express.Router();
 let User = require('../model/User');
-// Add Book
+// Add User
 userRoute.route('/add-user').post((req, res, next) => {
-    User.create(req.body, (error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(data)
-    }
+  bcrypt.hash(req.body.password, 10)
+  .then(hash =>{
+    const users = new User({
+      prenom: req.body.prenom,
+      nom: req.body.nom,
+      role: req.body.role,
+      email: req.body.email,
+      password: hash,
+      imageUrl: req.body.imageUrl
+    });
+    users.save()
+    .then(()=> res.status(201).json({message: 'Inscription réussi !'}))
+    .catch(error => res.status(400).json({error}));
   })
+  .catch(error => res.status(400).json({ error }));
 });
-// Get all Book
-userRoute.route('/').get((req, res) => {
+// Get all User
+userRoute.route('/').get((req, res, next) => {
     User.find((error, data) => {
     if (error) {
       return next(error)
@@ -22,8 +31,8 @@ userRoute.route('/').get((req, res) => {
     }
   })
 })
-// Get Book
-userRoute.route('/read-user/:id').get((req, res) => {
+// Get User
+userRoute.route('/read-user/:id').get((req, res,next) => {
     User.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error)
@@ -33,7 +42,7 @@ userRoute.route('/read-user/:id').get((req, res) => {
   })
 })
 
-// Update Book
+// Update User
 userRoute.route('/update-user/:id').put((req, res, next) => {
     User.findByIdAndUpdate(req.params.id, {
     $set: req.body
@@ -47,7 +56,7 @@ userRoute.route('/update-user/:id').put((req, res, next) => {
     }
   })
 })
-// Delete Book
+// Delete User
 userRoute.route('/delete-user/:id').delete((req, res, next) => {
     User.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {

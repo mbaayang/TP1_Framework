@@ -3,3 +3,16 @@
     margin-left: 12%;
     margin-right: 12%;
 }
+.bi{
+    cursor: pointer;
+}
+.btn{
+    border-radius: 50px;
+}
+.btn:hover{
+    background-color: #e493a3;
+    border-radius: 50px;
+}
+.pagination::ng-deep .ngx-pagination .current{
+    background: #e493a3;
+} 
