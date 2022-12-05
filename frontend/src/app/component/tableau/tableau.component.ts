@@ -11,8 +11,10 @@ import { UserService } from 'src/app/services/user.service';
 export class TableauComponent implements OnInit {
 
   filterTerm!: string;
-
   Users:any = [];
+
+  totalLenght: any;
+  page : number=1;
 
   constructor(private UserService: UserService) {}
 

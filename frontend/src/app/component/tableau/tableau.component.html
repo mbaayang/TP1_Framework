@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let donnee of Users;let i = index">
+        <tr *ngFor="let donnee of Users | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght };;let i = index">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
@@ -30,31 +30,6 @@
     </tbody>
   </table>
 
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title">Modifier</h5>
-               </div>
-                  <div class="modal-body">
-                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
-                          <label for='prenom'>Prenom</label>
-                          <input type="text" id="" name="prenom" class="form-control" value="">
-                          <br />
-                          <label for='nom'>Nom</label>
-                          <input type="text" name="nom" class="form-control" value="">
-                          <br />
-                          <label for='email'>Adresse email</label>
-                          <input type="email" name="email" class="form-control" value="">
-                          <br />
-                          <button type="submit" class="btn btn-success">Sauvegarder</button>
-                      </form>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                  </div>
-          </div>
-      </div>
-  </div> -->
+  <div class="pagination fixed-bottom justify-content-center">
+    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+  </div> 

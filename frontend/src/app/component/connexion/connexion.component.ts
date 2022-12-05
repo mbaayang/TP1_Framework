@@ -10,12 +10,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ConnexionComponent {
   registerForm!:FormGroup
   title = 'angularvalidate';
-  submitted=false
+  submitted=false;
+  imageUrl!:string;
 
   constructor(private formBuilder:FormBuilder){
 
   }
   ngOnInit(){
+    this.imageUrl='../assets/default-avatar.jpg';
+
     this.registerForm = this.formBuilder.group({
      
       email:['',[Validators.required,Validators.email]],
@@ -27,6 +30,5 @@ export class ConnexionComponent {
       if(this.registerForm.invalid){
         return
       }
-      alert("Success")
     }
   }

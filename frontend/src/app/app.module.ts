@@ -13,6 +13,7 @@ import { ModifierComponent } from './component/modifier/modifier.component';
 import { TableauComponent } from './component/tableau/tableau.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 /* import { Ng2SearchPipeModule } from 'ng2-search-filter'; */
 
 
@@ -36,7 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    /* Ng2SearchPipeModule */
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
