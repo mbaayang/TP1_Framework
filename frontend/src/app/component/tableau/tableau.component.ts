@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -25,11 +26,21 @@ export class TableauComponent implements OnInit {
   }
   delete(id:any, i:any) {
     console.log(id);
-    if(window.confirm('Êtes-vous sûre de vouloir supprimer?')) {
-      this.UserService.deleteUser(id).subscribe((res) => {
-        this.Users.splice(i, 1);
-      })
-    }
+    Swal.fire({
+      title: 'Suppression',
+      text: 'Êtes-vous sûre de vouloir supprimer?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler',
+    }).then((result) => {
+      if (result.value) {
+        this.UserService.deleteUser(id).subscribe((res) => {
+          this.Users.splice(i, 1);
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+      }
+    });
   };
 
 

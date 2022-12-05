@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-inscription',
@@ -38,49 +40,22 @@ export class InscriptionComponent implements OnInit {
 
   }
 
-
-
-  /* onSubmit(){
-    this.submitted = true
+  onSubmite(){
+    this.submitted = true;
 
     if(this.registerForm.invalid){
-      return
+      return;
     }
-    alert("Success")
-  }*/
 
+      Swal.fire('INSCRIPTION REUSSIE');
 
-  /* saveUsers(): void {
-    const data = {
-      prenom: this.registerForm.value.prenom,
-      nom: this.registerForm.value.nom,
-      email: this.registerForm.value.email,
-      role: this.registerForm.value.role,
-      imageUrl: this.registerForm.value.imageUrl,
-      // tel: this.registerForm.value.tel,
-      password: this.registerForm.value.password,
-      passwordConfirm: this.registerForm.value.passwordConfirm
-    } */
-    // this.UserService.createUser(data)
-    // .subscribe({
-    //   next: (res) => {
-    //     console.log(res);
-    //     this.submitted = true;
-    //   },
-    //   error: (e) => console.error(e)
-    // });
-    /* this.userService.addUser(data).subscribe(
-      data =>{
-        console.log(data)
-      }
-    )
-  } */
+  }
 
   onSubmit(): any {
     this.UserService.AddUser(this.registerForm.value)
     .subscribe(() => {
         console.log('Inscription réussie !')
-        this.ngZone.run(() => this.router.navigateByUrl('/'))
+        /* this.ngZone.run(() => this.router.navigateByUrl('/')) */
       }, (err) => {
         console.log(err);
     });
