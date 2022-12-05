@@ -1,4 +1,22 @@
-<table class="table table-hover w-75 my-5">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search..."
+      [(ngModel)]="filterTerm"
+    />
+  </div> -->
+
+  <table class="table table-hover w-75 my-5">
     <thead>
         <tr class="line">
             <th scope="col">Prenom</th>
@@ -9,17 +27,22 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let donnee of donnees">
+        <tr *ngFor="let donnee of Users;let i = index">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
-            <td>{{ donnee.tel }}</td>
             <td>{{ donnee.role }}</td>
             <td>
-                <i class="bi bi-archive"></i>
-                <i class="bi bi-pencil-square m-2"></i>
-                <i class="bi bi-arrow-down-up"></i>
+                <i class="bi bi-archive" (click)="delete(donnee._id, i)"></i>
+                <i class="bi bi-pencil-square m-2" routerLink="/modif/{{donnee._id}}"></i>
+                <i class="bi bi-arrow-down-up" (click)="changeRole(donnee._id, donnee.role)"></i>
             </td>
         </tr>
     </tbody>
   </table>
+
+
+
+
+</body>
+</html>

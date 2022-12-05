@@ -13,6 +13,9 @@ import { ModifierComponent } from './component/modifier/modifier.component';
 import { TableauComponent } from './component/tableau/tableau.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+/* import { Ng2SearchPipeModule } from 'ng2-search-filter'; */
+
+
 
 @NgModule({
   declarations: [
@@ -25,13 +28,15 @@ import { HttpClientModule } from '@angular/common/http';
     PageUserComponent,
     ConnexionComponent,
     InscriptionComponent,
-    ModifierComponent
+    ModifierComponent,
+
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    /* Ng2SearchPipeModule */
   ],
   providers: [],
   bootstrap: [AppComponent]

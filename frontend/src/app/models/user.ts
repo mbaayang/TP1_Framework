@@ -1,12 +1,14 @@
 export interface User{
-  
+    id?:any;
+    nom? : String;
     prenom?:String;
-    imageUrl?:any;
-    tel?:number;
+    email?: String;
+    imageUrl?:File;
+    role?: String;
     password?:String | Number;
     passwordConfirm?: String | Number;
-    email?: String;
-    nom? : String;
-    role?: String;
+
+
+
 
 }

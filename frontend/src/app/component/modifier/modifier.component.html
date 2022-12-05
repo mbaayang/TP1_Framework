@@ -1,1 +1,22 @@
-<p>modifier works!</p>
+<div class="w-100 d-flex justify-content-center mt-5">
+  <form [formGroup]="updateForm" (ngSubmit)="onUpdate()" class="d-flex justify-content-center p-4 bg-info" style="display: flex;flex-direction:column;gap:20px;position: absolute;border-radius: 20px;">
+    <input type="text" formControlName="id"  hidden>
+  <div class="mb-3">
+    <label for="prenom" class="form-label">PRENOM</label>
+    <input type="text" class="form-control" formControlName="prenom">
+  </div>
+
+  <div class="mb-3">
+    <label for="nom" class="form-label">NOM</label>
+    <input type="text" class="form-control"  formControlName="nom"  aria-describedby="emailHelp">
+
+  </div>
+
+  <div class="mb-3">
+      <label class="form-label" for="email">EMAIL</label>
+    <input type="email" class="form-control" formControlName="email">
+
+  </div>
+  <button type="submit" class="btn btn-primary">MODIFIER</button>
+</form>
+</div>

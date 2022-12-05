@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { monTab } from 'src/app/models/donnes-tab.model';
-import { UserServices } from 'src/app/services/user.service';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-tableau',
@@ -9,19 +10,44 @@ import { UserServices } from 'src/app/services/user.service';
 })
 export class TableauComponent implements OnInit {
 
-  @Input() tab!: monTab;
+  filterTerm!: string;
 
-  donnees!: monTab[];
+  Users:any = [];
 
-  constructor(private UserService: UserServices){}
+  constructor(private UserService: UserService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone) {
 
-  
-  ngOnInit(){
- this.UserService.getAllUser().subscribe((donnee: monTab[])=> {
-  this.donnees=[...donnee]
- })
-
+     }
+  ngOnInit(): void {
+    this.UserService.GetUsers().subscribe(res => {
+      console.log(res)
+      this.Users =res;
+    });
   }
+  delete(id:any, i:any) {
+    console.log(id);
+    if(window.confirm('Êtes-vous sûre de vouloir supprimer?')) {
+      this.UserService.deleteUser(id).subscribe((res) => {
+        this.Users.splice(i, 1);
+      })
+    }
+  };
+
+
+  changeRole=(id:any,role:any)=> {
+    role == "Admin" ? role ="User": role = "Admin"
+
+    const user ={
+     role : role
+    }
+
+    this.UserService.updateUser(id,user).subscribe(
+
+      data=>{
+        this.ngOnInit();
+      });
+   }
+
+
 }
 
 

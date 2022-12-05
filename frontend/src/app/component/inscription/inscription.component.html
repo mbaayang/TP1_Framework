@@ -1,22 +1,8 @@
 <body style="background-color:  #e493a3; height: 683px;">
     <div class="container w-50">
-        <form (submit)="saveUsers()" [formGroup]="registerForm" id="leform" class="row g-3" action="/Users/add">
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm" id="leform" class="row g-3">
             <h2 class="text-center">S'inscrire</h2>
-            <div class=" col-md-6">
-                <label for="nom">Nom</label>
-                <input [ngClass]="{'is-invalid':submitted && registerForm.controls['nom'].errors}" formControlName="nom"
-                    type="text" class="form-control" autocomplete="on"
-                    >
-                <div *ngIf="submitted && registerForm.controls['nom'].errors" class="text-danger">
-                    <div *ngIf="submitted && registerForm.controls['nom'].errors['required']">
-                        Le nom est obligatoire!
-                    </div>
-                    <div *ngIf="submitted && registerForm.controls['nom'].errors['minlength']">
-                        Le nom doit contenir au moins 4 caraceres
-                    </div>
-                </div>
-            </div>
-      
+
             <div class="col-md-6">
                 <label for="prenom">Prenom</label>
                 <input [ngClass]="{'is-invalid':submitted && registerForm.controls['prenom'].errors}"
@@ -28,6 +14,21 @@
                     </div>
                 </div>
             </div>
+
+            <div class=" col-md-6">
+              <label for="nom">Nom</label>
+              <input [ngClass]="{'is-invalid':submitted && registerForm.controls['nom'].errors}" formControlName="nom"
+                  type="text" class="form-control" autocomplete="on"
+                  >
+              <div *ngIf="submitted && registerForm.controls['nom'].errors" class="text-danger">
+                  <div *ngIf="submitted && registerForm.controls['nom'].errors['required']">
+                      Le nom est obligatoire!
+                  </div>
+                  <div *ngIf="submitted && registerForm.controls['nom'].errors['minlength']">
+                      Le nom doit contenir au moins 4 caraceres
+                  </div>
+              </div>
+          </div>
 
             <div class="col-md-6">
                 <label for="email">Email Address</label>
@@ -43,7 +44,7 @@
                     </div>
                 </div>
             </div>
-     
+
             <div class="col-md-6">
                 <label for="role">Rôle</label>
                 <select class="form-select"
@@ -51,7 +52,7 @@
                     >
                     <option value="admin">Admin</option>
                     <option value="user">User</option>
-             
+
                 </select>
                 <div *ngIf="submitted && registerForm.controls['role'].errors" class="text-danger">
                     <div *ngIf="submitted && registerForm.controls['role'].errors['required']">
@@ -60,7 +61,7 @@
 
                 </div>
             </div>
-    
+
             <div class=" col-md-6">
                 <label for="password">Password</label>
                 <input [ngClass]="{'is-invalid':submitted && registerForm.controls['password'].errors}"
@@ -75,7 +76,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="col-md-6">
                 <label for="passwordConfirm">Confirmation Password</label>
                 <input [ngClass]="{'is-invalid':submitted && registerForm.controls['password'].errors}"
@@ -90,13 +91,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-md-6">
-                <label for="imageUrl">Profil</label>
-                <input formControlName="photo" type="file" class="form-control" name="imageUrl"
+                <label for="imageUrl">Photo</label>
+                <input formControlName="photo" type="text" class="form-control" name="imageUrl"
                 >
             </div>
-           
+
             <div class="form-group">
                 <button class="btn btn-outline-danger">S'inscrire</button>
             </div>
@@ -109,17 +110,17 @@
     <div class="col-md-6">
         <label for="nom" class="form-label">Nom</label>
         <input type="text" class="form-control" id="nom" name="nom" placeholder=" Nom" autocomplete="on">
-        
+
     </div>
     <div class="col-md-6">
         <label for="prenom" class="form-label">Prenom</label>
         <input type="text" class="form-control" id="prenom" name="prenom" placeholder=" Prenom" autocomplete="on">
-        
+
     </div>
     <div class="col-md-6">
         <label for="email" class="form-label">Adresse email</label>
         <input type="email" class="form-control" id="Email" name="email" placeholder="Adresse email" autocomplete="on">
-        
+
     </div>
     <div class="col-md-6">
         <label for="rôle" class="form-label">Rôle</label>
@@ -128,17 +129,17 @@
         <option value="Administrateur">Administrateur</option>
         <option value="Utilisateur">Utilisateur</option>
         </select>
-        
+
     </div>
     <div class="col-md-6">
         <label for="passwords" class="form-label">Mot de passe</label>
         <input type="password" class="form-control" id="mdp1" name="passwords" placeholder="Mot de passe" autocomplete="off">
-        
+
     </div>
     <div class="col-md-6">
         <label for="password_retype" class="form-label">Ressaisissez le mot de passe</label>
         <input type="password" name="password_retype" class="form-control" id="mdp2" placeholder="Ressaisissez le mot de passe" autocomplete="off">
-        
+
     </div>
     <div class="col-md-6">
         <label for="photo" class="form-label">Photo</label>
@@ -146,8 +147,8 @@
     </div>
     <div class="col-8">
         <button type="submit" class="btn btn-primary mb-3" name="submit">S'inscrire</button>
-    </div>    
+    </div>
     <div class="col-4">
         <p><a href=""> Se connecter ? </a></p>
-    </div>         
+    </div>
 </form> -->

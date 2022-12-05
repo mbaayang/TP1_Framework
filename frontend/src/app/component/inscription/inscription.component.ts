@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { monTab } from 'src/app/models/donnes-tab.model';
-import { UserServices } from 'src/app/services/user.service';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-inscription',
@@ -10,43 +9,48 @@ import { UserServices } from 'src/app/services/user.service';
   styleUrls: ['./inscription.component.scss']
 })
 export class InscriptionComponent implements OnInit {
-  registerForm!:FormGroup;
+  registerForm!: FormGroup;
   title = 'angularvalidate';
 
-    users!: monTab 
+
 
   submitted=false;
 
-  constructor(private formBuilder:FormBuilder,
-              private userService: UserServices ){
+  constructor(public formBuilder: FormBuilder,
+    private router: Router,
+    private ngZone: NgZone,
+    private UserService: UserService ){
+      this.registerForm = this.formBuilder.group({
+        prenom:['',Validators.required],
+        nom:['',[Validators.required,Validators.minLength(4)]],
+        email:['',[Validators.required,Validators.email]],
+        role:['',Validators.required],
+        password:['',[Validators.required,Validators.minLength(8)]],
+        photo:['',Validators.required],
+
+
+      })
 
   }
+  listDeroulant=['admin','user'];
 
   ngOnInit(){
-    this.registerForm = this.formBuilder.group({
-      nom:['',[Validators.required,Validators.minLength(4)]],
-      prenom:['',Validators.required],
-      role:['',Validators.required],
-      photo:['',Validators.required],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(8)]],
-      
-    })
+
   }
 
-   listDeroulant=['admin','user'];
 
-  onSubmit(){
+
+  /* onSubmit(){
     this.submitted = true
-    
+
     if(this.registerForm.invalid){
-      return 
+      return
     }
     alert("Success")
-  }
+  }*/
 
 
-  saveUsers(): void {
+  /* saveUsers(): void {
     const data = {
       prenom: this.registerForm.value.prenom,
       nom: this.registerForm.value.nom,
@@ -56,8 +60,7 @@ export class InscriptionComponent implements OnInit {
       // tel: this.registerForm.value.tel,
       password: this.registerForm.value.password,
       passwordConfirm: this.registerForm.value.passwordConfirm
-    }
-console.log(data)
+    } */
     // this.UserService.createUser(data)
     // .subscribe({
     //   next: (res) => {
@@ -66,12 +69,22 @@ console.log(data)
     //   },
     //   error: (e) => console.error(e)
     // });
-    this.userService.addUser(data).subscribe(
+    /* this.userService.addUser(data).subscribe(
       data =>{
         console.log(data)
       }
     )
-  } 
+  } */
+
+  onSubmit(): any {
+    this.UserService.AddUser(this.registerForm.value)
+    .subscribe(() => {
+        console.log('Inscription réussie !')
+        this.ngZone.run(() => this.router.navigateByUrl('/'))
+      }, (err) => {
+        console.log(err);
+    });
+  }
 
 
 
