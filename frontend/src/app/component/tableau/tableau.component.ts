@@ -12,20 +12,39 @@ export class TableauComponent implements OnInit {
 
   filterTerm!: string;
   Users:any = [];
-
+  user:any;
   totalLenght: any;
   page : number=1;
 
   constructor(private UserService: UserService) {}
 
   ngOnInit(): void {
-    this.UserService.GetUsers().subscribe(res => {
-      console.log(res)
-      this.Users =res;
-    });
+    this.UserService.GetUsers().subscribe( 
+      data =>{
+        this.user = data;
+        this.Users = this.user.filter((e:any)=> e.etat == false)
+          console.log(this.Users)
+        }
+    );
   }
-  delete(id:any, i:any) {
-    console.log(id);
+
+  changeRole=(id:any,role:any)=> {
+    role == "Administrateur" ? role ="Utilisateur": role = "Administrateur"
+    const user ={
+     role : role
+    }
+    this.UserService.updateUser(id,user).subscribe(
+
+      data=>{
+        this.ngOnInit();
+      });
+   }
+
+   changArchive=(id:any,etat:any)=> {
+    etat == false ? etat =true: etat = false
+    const user ={
+     etat : etat
+    }
     Swal.fire({
       title: 'Suppression',
       text: 'Êtes-vous sûre de vouloir supprimer?',
@@ -35,30 +54,13 @@ export class TableauComponent implements OnInit {
       cancelButtonText: 'Annuler',
     }).then((result) => {
       if (result.value) {
-        this.UserService.deleteUser(id).subscribe((res) => {
-          this.Users.splice(i, 1);
-        })
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-      }
-    });
-  };
-
-
-  changeRole=(id:any,role:any)=> {
-    role == "Administrateur" ? role ="Utilisateur": role = "Administrateur"
-
-    const user ={
-     role : role
-    }
-
     this.UserService.updateUser(id,user).subscribe(
-
       data=>{
         this.ngOnInit();
       });
+    }else if (result.dismiss === Swal.DismissReason.cancel) {
+    }
+    })
    }
 
 }
-
-
-

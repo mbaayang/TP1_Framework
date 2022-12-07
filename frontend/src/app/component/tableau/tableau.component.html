@@ -19,15 +19,16 @@
             <th scope="col">Actions</th>
         </tr>
     </thead>
+
     <tbody>
-        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght  };;let i = index">
+        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
             <td>
-              <button class="btn link" (click)="delete(donnee._id, i)">
-                <i class="bi bi-archive"></i>
+              <button class="btn link" (click)="changArchive(donnee._id, donnee.etat)">
+                <i class="bi bi-arrow-down-square"></i>
               </button>
               <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
                 <i class="bi bi-pencil-square"></i>

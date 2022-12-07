@@ -6,6 +6,7 @@ let User = new Schema({
   email: {type: String, required: true, unique: true},
   role: {type: String, required: true},
   password: {type: String, required: true},
+  etat: {type: Boolean, required: false},
   imageUrl: {type: String, required: false}
 }, {timestamps: true},
 {
