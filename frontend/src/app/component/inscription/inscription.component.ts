@@ -23,8 +23,8 @@ export class InscriptionComponent implements OnInit {
     private userService: UserService ){
 
       this.registerForm = this.formBuilder.group({
-        prenom:['',Validators.required, UsernameValidator.cannotContainSpace],
-        nom:['',Validators.required, UsernameValidator.cannotContainSpace],
+        prenom:['',[Validators.required, UsernameValidator.cannotContainSpace]],
+        nom:['',[Validators.required, UsernameValidator.cannotContainSpace]],
         email:['',[Validators.required,Validators.email]],
         role:['',Validators.required],
         password:['',[Validators.required,Validators.minLength(8)]],
