@@ -12,7 +12,7 @@ export class TableauComponent implements OnInit {
 
   filterTerm!: string;
   Users:any = [];
-
+user:any;
   totalLenght: any;
   page : number=1;
 
@@ -22,17 +22,17 @@ export class TableauComponent implements OnInit {
     this.UserService.GetUsers().subscribe( 
       data =>{
 
-        this.Users = data;
-        this.changeArchive = this.Users.filter((e:any)=> e.etat == false)
-               console.log(this.changeArchive)
+        this.user = data;
+        this.Users = this.user.filter((e:any)=> e.etat == false)
+               console.log(this.Users)
               }
 );
   }
-  delete(id:any, i:any) {
+  delete(id:any, etat:any) {
     console.log(id);
     if(window.confirm('Êtes-vous sûre de vouloir supprimer?')) {
       this.UserService.deleteUser(id).subscribe((res) => {
-        this.Users.splice(i, 1);
+        this.Users.splice(etat, 1);
       })
     }
   };
@@ -53,6 +53,20 @@ export class TableauComponent implements OnInit {
    }
 
    changeArchive=(id:any,etat:any)=> {
+    etat == false ? etat =true: etat = false
+
+    const user ={
+     etat : etat
+    }
+
+    this.UserService.updateUser(id,user).subscribe(
+
+      data=>{
+        this.ngOnInit();
+      });
+   }
+
+   changArchive=(id:any,etat:any)=> {
     etat == false ? etat =true: etat = false
 
     const user ={

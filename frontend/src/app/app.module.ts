@@ -24,6 +24,7 @@ import { PageArchiveComponent } from './page-archive/page-archive.component';
     TableauComponent,
     PageAdminComponent,
     PageUserComponent,
+    PageArchiveComponent,
     ConnexionComponent,
     InscriptionComponent,
     ModifierComponent,
