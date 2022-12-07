@@ -7,35 +7,17 @@
                   <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
               </div>
           </div>
-          <div class="nom d-flex">
-            <p><strong>{{ this.currentUser.prenom }}</strong></p>
-            <p><strong>{{ this.currentUser.nom }}</strong></p>
+          <div class="nom">
+            <h3>{{ this.currentUser.prenom }} {{ this.currentUser.nom }}</h3>
+            <p>Matricule</p>
           </div>
       </div>
       <div class="end">
-        <a class="m-1" href=""><i style="font-size: 20px;" class="bi bi-person-plus"></i> Ajouter</a>
-            <a class="m-1" href=""><i style="font-size: 20px;" class="bi bi-person-x"></i> Archives</a>
+        <a class="m-1" routerLink="/user-profile/:id"><i style="font-size: 25px;" class="bi bi-person-plus"></i> Actives</a>
+          <a class="m-1" routerLink="/archives"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archives</a>
           <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
               <i class="bi bi-gear-fill"></i>
           </button>
-          <!-- <button (click)="logout()" *ngIf="this.authService.isLoggedIn" type="button" class="btn btn-danger">Logout</button> -->
-          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasRightLabel">Paramétres</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-              <div class="setting m-4">
-                  <a href=""><i class="bi bi-sliders2"></i> Changer mon mot de passe </a>
-              </div>
-              <div class="setting m-4">
-                  <a href=""><i class="bi bi-person-fill-gear"></i> Changer la photo de profil </a>
-              </div>
-              <div class="setting m-4">
-                  <a  (click)="logout()" *ngIf="this.authService.isLoggedIn" href=""><i class="bi bi-box-arrow-right"></i> Deconnexion </a>
-              </div>
-            </div>
-          </div>
       </div>
   </div>
 </header>

@@ -5,6 +5,6 @@ export class User {
   email!: String;
   role!: String;
   password!: String;
-  etat!: Boolean;
-  photo!: String;
+  etat!: boolean;
+  imageUrl!: String;
 }

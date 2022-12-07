@@ -40,17 +40,10 @@ export class ModifierComponent implements OnInit {
     this.authService.updateUser(this.getId, this.updateForm.value)
     .subscribe(() => {
         console.log('Modification réussie !')
-        this.ngZone.run(() => this.router.navigateByUrl('/Users'));
+        this.ngZone.run(() => this.router.navigateByUrl('/user-profile/:id'));
         Swal.fire('Modification réussie !');
       }, (err) => {
         console.log(err);
     });
   }
-
-  
-
-
-
-
-
 }

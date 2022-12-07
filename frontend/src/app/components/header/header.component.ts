@@ -25,10 +25,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.imageUrl='../assets/default-avatar.jpg';
   }
-  logout() {
-    this.authService.doLogout()
-  }
-
-
-
 }

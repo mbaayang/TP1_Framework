@@ -10,24 +10,18 @@ const { check, validationResult } = require('express-validator')
 router.post(
   '/register-user',
   [
-    check('name')
-      .not()
-      .isEmpty()
-      .isLength({ min: 3 })
-      .withMessage('Name must be atleast 3 characters long'),
+    check('nom').not().isEmpty(),
+    check('prenom').not().isEmpty(),
     check('email', 'Email is required').not().isEmpty(),
-    check('password', 'Password should be between 5 to 16 characters long')
+    check('password', 'Password should be between 8 to 16 characters long')
       .not()
       .isEmpty()
-      .isLength({ min: 5, max: 16 }),
+      .isLength({ min: 8, max: 16 }),
   ],
   (req, res, next) => {
     const errors = validationResult(req)
     console.log(req.body)
 
-    /* if (!errors.isEmpty()) {
-      return res.status(400).jsonp(errors.array())
-    } else { */
       bcrypt.hash(req.body.password, 10).then((hash) => {
         const user = new userSchema({
           prenom: req.body.prenom,
@@ -36,7 +30,7 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          photo: req.body.photo,
+          imageUrl: req.body.imageUrl,
         })
         user
           .save()
@@ -52,7 +46,6 @@ router.post(
             })
           })
       })
-    /* } */
   },
 )
 

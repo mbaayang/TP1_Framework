@@ -9,29 +9,38 @@ import { Router } from '@angular/router';
   styleUrls: ['./connection.component.scss']
 })
 export class ConnectionComponent implements OnInit {
-  signinForm: FormGroup;
+  title = 'angularvalidate'
+  registerForm: FormGroup;
   submitted=false;
+  imageUrl!:string;
+
   constructor(
-    public fb: FormBuilder,
+    public formBuilder: FormBuilder,
     public authService: AuthService,
     public router: Router
   ) {
-    this.signinForm = this.fb.group({
+    this.registerForm = this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
       password:['',[Validators.required,Validators.minLength(5)]]
     });
   }
-  ngOnInit() {}
-  onSubmit() {
+  ngOnInit() {
+    this.imageUrl='../assets/default-avatar.jpg';
+  }
+/*   onSubmit() {
     this.submitted = true
 
     if(this.signinForm.invalid){
       return
     }
-    /* alert("Success") */
-  }
+  } */
   loginUser() {
-    this.authService.signIn(this.signinForm.value);
-  }
+    this.authService.signIn(this.registerForm.value);
 
+    this.submitted = true;
+
+    if(this.registerForm.invalid){
+      return;
+  }
+  }
 }

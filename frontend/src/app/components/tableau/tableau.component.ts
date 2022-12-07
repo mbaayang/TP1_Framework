@@ -28,21 +28,18 @@ export class TableauComponent implements OnInit {
 
         this.user = data;
         this.Users = this.user.filter((e:any)=> e.etat == false)
-               console.log(this.Users)
-              }
-);
+          console.log(this.Users)
+        }
+    );
   }
 
 
   changeRole=(id:any,role:any)=> {
-    role == "admin" ? role ="user": role = "admin"
-
+    role == "Administrateur" ? role ="Utilisateur": role = "Administrateur"
     const user ={
      role : role
     }
-
     this.authService.updateUser(id,user).subscribe(
-
       data=>{
         this.ngOnInit();
       });
@@ -55,7 +52,7 @@ export class TableauComponent implements OnInit {
     }
     Swal.fire({
       title: 'Archivage',
-      text: 'Êtes-vous sûre de vouloir archiver?',
+      text: 'Êtes-vous sûre de vouloir archiver ?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Confirmer',

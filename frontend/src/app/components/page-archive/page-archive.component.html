@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="my-5">
   <div class="form-group col-md-4">
     <div class="input-group">
@@ -9,7 +11,7 @@
       [(ngModel)]="filterTerm"/>
     </div>
   </div>
-  <table class="table table-hover w-75 my-3">
+<table class="table table-hover w-75 my-5">
     <thead>
         <tr class="line">
             <th scope="col">Prenom</th>
@@ -19,29 +21,20 @@
             <th scope="col">Actions</th>
         </tr>
     </thead>
-
     <tbody>
-        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
+        <tr *ngFor="let donnee of userArchive | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
             <td>
-              <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
-                <i class="bi bi-arrow-down-square"></i>
-              </button>
-              <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button class="btn link" (click)="changeRole(donnee._id, donnee.role)">
-                <i class="bi bi-arrow-left-right" ></i>
+              <button class="btn link" (click)="dearchiveUser(donnee._id, donnee.etat)">
+                <i class="bi bi-arrow-up-square"></i>
               </button>
             </td>
         </tr>
     </tbody>
   </table>
-</div>
-
   <div class="pagination fixed-bottom justify-content-center">
     <pagination-controls (pageChange)="page=$event"></pagination-controls>
   </div> 
