@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/donnes-tab.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import {HttpClient, HttpHeaders,HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpHeaders,HttpErrorResponse, HttpRequest, HttpEvent } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,26 @@ export class UserService {
  // Http Header
  httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
  constructor(private httpClient: HttpClient) {}
+
+//Upload image
+upload(file: File): Observable<HttpEvent<any>> {
+  const formData: FormData = new FormData();
+
+  formData.append('file', file);
+
+  const req = new HttpRequest('POST', `${this.REST_API}/upload`, formData, {
+    reportProgress: true,
+    responseType: 'json'
+  });
+
+  return this.httpClient.request(req);
+}
+
+getFiles(): Observable<any> {
+  return this.httpClient.get(`${this.REST_API}/files`);
+}
+
+
  // Add
  AddUser(data: User): Observable<any> {
    let API_URL = `${this.REST_API}/add-user`;

@@ -34,28 +34,6 @@ export class InscriptionComponent implements OnInit {
   }
   listDeroulant=['Administrateur','Utilisateur'];
 
-  checkPassword=()=>{
-    
-    let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
-    let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
-
-    console.log(pass1 != pass2)
-   
-    if( pass1 != pass2)
-    {
-      this.verifPass = false;
-      this.registerForm = this.formBuilder.group(
-        {
-       
-        password:[''],
-        passwordConfirm:[''],
-        
-      })
-
-      setTimeout(()=>{ this.verifPass = true}, 3000);
-    }
- }
-
   ngOnInit(){
 
   }
@@ -69,15 +47,23 @@ export class InscriptionComponent implements OnInit {
       }, (err) => {
         console.log(err);
     });
-    this.registerForm.reset();
-  }
+    let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
+    let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
+    if( pass1 !== pass2)
+    {
+      this.verifPass = false;
+      this.registerForm = this.formBuilder.group(
+        {password:[''],passwordConfirm:['']}
+      )
+      setTimeout(()=>{ this.verifPass = true}, 5000);
+    }
 
-  submitForm(){
-    this.submitted = true
-    
+    this.submitted = true;
     if(this.registerForm.invalid){
       return;
     }
-  }  
+    
+/*     this.registerForm.reset(); */
+  }
 
 }
