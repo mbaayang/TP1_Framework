@@ -1,0 +1,21 @@
+
+<header class="header">
+  <div class="menu_admin">
+      <div class="infos">
+          <div>
+              <div class="profil d-flex justify-center">
+                  <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
+              </div>
+          </div>
+          <div class="nom d-flex">
+            <p><strong>{{ this.currentUser.prenom }}</strong></p>
+            <p><strong>{{ this.currentUser.nom }}</strong></p>
+          </div>
+      </div>
+      <div class="end">
+          <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <i class="bi bi-gear-fill"></i>
+          </button>
+      </div>
+  </div>
+</header>

@@ -1,46 +1,53 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './service/authconfig.interceptor';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './component/header/header.component';
-import { RechercheComponent } from './component/recherche/recherche.component';
-import { PaginationComponent } from './component/pagination/pagination.component';
-import { PageAdminComponent } from './component/page-admin/page-admin.component';
-import { PageUserComponent } from './component/page-user/page-user.component';
-import { ConnexionComponent } from './component/connexion/connexion.component';
-import { InscriptionComponent } from './component/inscription/inscription.component';
-import { ModifierComponent } from './component/modifier/modifier.component';
-import { TableauComponent } from './component/tableau/tableau.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { ConnectionComponent } from './components/connection/connection.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TableauComponent } from './components/tableau/tableau.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FormsModule } from '@angular/forms';
-
-
+import { PageAdminComponent } from './components/page-admin/page-admin.component';
+import { PageUserComponent } from './components/page-user/page-user.component';
+import { TableUserComponent } from './components/table-user/table-user.component';
+import { TableArchiveComponent } from './components/table-archive/table-archive.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ModifierComponent } from './components/modifier/modifier.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ConnectionComponent,
+    InscriptionComponent,
     HeaderComponent,
     TableauComponent,
-    RechercheComponent,
-    PaginationComponent,
     PageAdminComponent,
     PageUserComponent,
-    ConnexionComponent,
-    InscriptionComponent,
-    ModifierComponent,
-
+    TableUserComponent,
+    TableArchiveComponent,
+    ModifierComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

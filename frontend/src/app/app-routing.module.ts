@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TableauComponent } from './component/tableau/tableau.component';
-import { ConnexionComponent } from './component/connexion/connexion.component';
-import { InscriptionComponent } from './component/inscription/inscription.component';
-import { ModifierComponent } from './component/modifier/modifier.component';
-
+import { Routes, RouterModule } from '@angular/router';
+import { ConnectionComponent } from './components/connection/connection.component';
+import { HeaderComponent } from './components/header/header.component';
+import { InscriptionComponent } from './components/inscription/inscription.component';
+import { ModifierComponent } from './components/modifier/modifier.component';
+import { TableauComponent } from './components/tableau/tableau.component';
+import { AuthGuard } from "./service/auth.guard";
 
 const routes: Routes = [
+  { path: '', redirectTo: '/log-in', pathMatch: 'full' },
+  { path: 'log-in', component: ConnectionComponent },
+  { path: 'sign-up', component: InscriptionComponent },
+  { path: 'modif/:id', component: ModifierComponent },
   { path: 'Users', component: TableauComponent },
-  { path: '', component: ConnexionComponent },
-  {path: "inscriptionUser", component: InscriptionComponent},
-  { path: 'modif/:id', component: ModifierComponent}
+  { path: 'user-profile/:id', component: HeaderComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
