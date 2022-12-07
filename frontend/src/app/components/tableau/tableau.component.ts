@@ -22,10 +22,7 @@ export class TableauComponent implements OnInit {
 
      }
   ngOnInit(): void {
-    this.authService.GetUsers().subscribe(res => {
-      console.log(res)
-      this.Users =res;
-    });
+
     this.authService.GetUsers().subscribe(
       data =>{
 
@@ -35,28 +32,10 @@ export class TableauComponent implements OnInit {
               }
 );
   }
-  archive(id:any, i:any) {
-    console.log(id);
-    Swal.fire({
-      title: 'Suppression',
-      text: 'Êtes-vous sûre de vouloir supprimer?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Confirmer',
-      cancelButtonText: 'Annuler',
-    }).then((result) => {
-      if (result.value) {
-        this.authService.deleteUser(id).subscribe((res) => {
-          this.Users.splice(i, 1);
-        })
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-      }
-    });
-  };
 
 
   changeRole=(id:any,role:any)=> {
-    role == "Admin" ? role ="User": role = "Admin"
+    role == "admin" ? role ="user": role = "admin"
 
     const user ={
      role : role
@@ -71,16 +50,25 @@ export class TableauComponent implements OnInit {
 
    changeArchive=(id:any,etat:any)=> {
     etat == false ? etat =true: etat = false
-
     const user ={
      etat : etat
     }
-
+    Swal.fire({
+      title: 'Archivage',
+      text: 'Êtes-vous sûre de vouloir archiver?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmer',
+      cancelButtonText: 'Annuler',
+    }).then((result) => {
+      if (result.value) {
     this.authService.updateUser(id,user).subscribe(
-
       data=>{
         this.ngOnInit();
       });
+    }else if (result.dismiss === Swal.DismissReason.cancel) {
+    }
+    })
    }
 
 

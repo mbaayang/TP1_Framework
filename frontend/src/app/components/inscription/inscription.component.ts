@@ -22,6 +22,7 @@ export class InscriptionComponent implements OnInit {
         email:['',[Validators.required,Validators.email]],
         role:['',Validators.required],
         password:['',[Validators.required,Validators.minLength(8)]],
+        etat:[0, Validators.required],
         photo:['',Validators.required],
     });
   }

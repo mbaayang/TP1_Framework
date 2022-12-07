@@ -25,7 +25,7 @@ let userSchema = new Schema({
     photo: {
         type: String, required:true
     }
-}, {
+}, /* {timestamps: true}, */{
     collection: 'user'
 })
 

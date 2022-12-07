@@ -35,7 +35,7 @@ router.post(
           email: req.body.email,
           role: req.body.role,
           password: hash,
-          etat:req.body.etat,
+          etat: req.body.etat,
           photo: req.body.photo,
         })
         user

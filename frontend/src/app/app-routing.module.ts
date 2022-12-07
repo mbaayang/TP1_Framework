@@ -4,6 +4,9 @@ import { ConnectionComponent } from './components/connection/connection.componen
 import { HeaderComponent } from './components/header/header.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { ModifierComponent } from './components/modifier/modifier.component';
+import { PageAdminComponent } from './components/page-admin/page-admin.component';
+import { PageUserComponent } from './components/page-user/page-user.component';
+import { TableArchiveComponent } from './components/table-archive/table-archive.component';
 import { TableauComponent } from './components/tableau/tableau.component';
 import { AuthGuard } from "./service/auth.guard";
 
@@ -11,9 +14,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/log-in', pathMatch: 'full' },
   { path: 'log-in', component: ConnectionComponent },
   { path: 'sign-up', component: InscriptionComponent },
-  { path: 'modif/:id', component: ModifierComponent },
-  { path: 'Users', component: TableauComponent },
-  { path: 'user-profile/:id', component: HeaderComponent, canActivate: [AuthGuard] }
+  /* { path: 'user-profile/:id', component: PageUserComponent, canActivate: [AuthGuard]}, */
+  { path: 'user-profile/:id', component: PageAdminComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
