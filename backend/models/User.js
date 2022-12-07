@@ -20,7 +20,7 @@ let userSchema = new Schema({
         type: String, required:true
     },
     etat: {
-        type: Boolean, required:false = true
+        type: Boolean, required:false
     },
     photo: {
         type: String, required:true
