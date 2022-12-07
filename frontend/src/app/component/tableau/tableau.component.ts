@@ -46,8 +46,8 @@ export class TableauComponent implements OnInit {
      etat : etat
     }
     Swal.fire({
-      title: 'Suppression',
-      text: 'Êtes-vous sûre de vouloir supprimer?',
+      title: 'Archiver',
+      text: 'Êtes-vous sûre de vouloir archiver?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Confirmer',

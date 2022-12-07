@@ -8,4 +8,5 @@ export class User{
     tel!:number;
     password!:String | Number;
     passwordConfirm!: String | Number;
+    etat?:boolean
 }

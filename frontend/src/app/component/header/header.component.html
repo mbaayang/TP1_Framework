@@ -3,7 +3,9 @@
         <div class="infos">
             <div>
                 <div class="profil d-flex justify-center">
+                    <a routerLink="/pageAdmin">
                     <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
+                    </a>
                 </div>
             </div>
             <div class="nom">
@@ -12,8 +14,8 @@
             </div>
         </div>
         <div class="end">
-            <a class="m-1" href=""><i style="font-size: 20px;" class="bi bi-person-plus"></i> Ajouter</a>
-            <a class="m-1" href=""><i style="font-size: 20px;" class="bi bi-person-x"></i> Archives</a>
+            <a class="m-1" ><i style="font-size: 20px;" class="bi bi-person-plus"></i> Ajouter</a>
+            <a class="m-1" routerLink="/pageArchive"><i style="font-size: 20px;" class="bi bi-person-x"></i> Archives</a>
             <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <i class="bi bi-gear-fill"></i>
             </button>    

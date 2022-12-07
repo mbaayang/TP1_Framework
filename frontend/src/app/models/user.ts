@@ -7,8 +7,5 @@ export interface User{
     role?: String;
     password?:String | Number;
     passwordConfirm?: String | Number;
-
-
-
-
+    etat?:boolean
 }

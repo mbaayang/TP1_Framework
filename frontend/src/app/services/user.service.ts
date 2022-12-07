@@ -3,6 +3,7 @@ import { User } from '../models/donnes-tab.model';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import {HttpClient, HttpHeaders,HttpErrorResponse, HttpRequest, HttpEvent } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,12 @@ export class UserService {
  REST_API: string = 'http://localhost:3000/api';
  // Http Header
  httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
- constructor(private httpClient: HttpClient) {}
+ currentUser = {};
+ constructor(private httpClient: HttpClient,
+              public router: Router) {}
 
 //Upload image
-upload(file: File): Observable<HttpEvent<any>> {
+/* upload(file: File): Observable<HttpEvent<any>> {
   const formData: FormData = new FormData();
 
   formData.append('file', file);
@@ -31,7 +34,7 @@ upload(file: File): Observable<HttpEvent<any>> {
 getFiles(): Observable<any> {
   return this.httpClient.get(`${this.REST_API}/files`);
 }
-
+ */
 
  // Add
  AddUser(data: User): Observable<any> {
@@ -44,7 +47,7 @@ getFiles(): Observable<any> {
  GetUsers() {
    return this.httpClient.get(`${this.REST_API}`);
  }
- // Get single object
+ // Get object
  GetUser(id: any): Observable<any> {
    let API_URL = `${this.REST_API}/read-user/${id}`;
    return this.httpClient.get(API_URL, { headers: this.httpHeaders }).pipe(
@@ -54,6 +57,17 @@ getFiles(): Observable<any> {
      catchError(this.handleError)
    );
  }
+ // Get single object
+ GetUse(id: any): Observable<any> {
+  let API_URL = `${this.REST_API}/read-user/${id}`;
+  return this.httpClient.get(API_URL, { headers: this.httpHeaders }).pipe(
+    map((res: any) => {
+      return res || {};
+    }),
+    catchError(this.handleError)
+  );
+}
+
  // Update
  updateUser(id: any, data: any): Observable<any> {
    let API_URL = `${this.REST_API}/update-user/${id}`;
@@ -68,6 +82,46 @@ getFiles(): Observable<any> {
      .delete(API_URL, { headers: this.httpHeaders })
      .pipe(catchError(this.handleError));
  }
+ // login
+ signUp(user: User): Observable<any> {
+  let api = `${this.REST_API}/register-user`;
+  return this.httpClient.post(api, user).pipe(catchError(this.handleError));
+}
+// login
+signIn(user: User) {
+  return this.httpClient
+    .post<any>(`${this.REST_API}/login`, user)
+    .subscribe((res: any) => {
+      localStorage.setItem('access_token', res.token);
+      this.getUserProfile(res._id).subscribe((res) => {
+        this.currentUser = res;
+        this.router.navigate(['user-profile/' + res.msg._id]);
+      });
+    });
+}
+getToken() {
+  return localStorage.getItem('access_token');
+}
+get isLoggedIn(): boolean {
+  let authToken = localStorage.getItem('access_token');
+  return authToken !== null ? true : false;
+}
+doLogout() {
+  let removeToken = localStorage.removeItem('access_token');
+  if (removeToken == null) {
+    this.router.navigate(['log-in']);
+  }
+}
+// User profile
+getUserProfile(id: any): Observable<any> {
+  let api = `${this.REST_API}/user-profile/${id}`;
+  return this.httpClient.get(api, { headers: this.httpHeaders }).pipe(
+    map((res) => {
+      return res || {};
+    }),
+    catchError(this.handleError)
+  );
+}
  // Error
  handleError(error: HttpErrorResponse) {
    let errorMessage = '';

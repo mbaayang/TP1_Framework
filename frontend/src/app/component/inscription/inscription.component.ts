@@ -44,7 +44,6 @@ export class InscriptionComponent implements OnInit {
 
   onSubmit(): any {
 
-console.log(this.registerForm.value)
     this.userService.AddUser(this.registerForm.value)
     .subscribe(() => {
         console.log('Inscription réussie !')
