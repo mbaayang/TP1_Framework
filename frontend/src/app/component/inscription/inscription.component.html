@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-
+<!-- <input type="text" formControlName="etat" value="true" hidden> -->
             <div class="col-md-6">
                 <label for="email">Email Address</label>
                 <input [ngClass]="{'is-invalid':submitted && registerForm.controls['email'].errors}"
@@ -98,6 +98,10 @@
             <div class="form-group">
                 <button (click)="submitForm()" class="btn btn-outline-danger">S'inscrire</button>
             </div>
+            <div class=" d-flex justify-content-end  text-decoration-none">
+                <p><a href="" > Se connecter</a></p>
+            </div>  
+
         </form>
     </div>
 </body>

@@ -23,12 +23,14 @@ export class InscriptionComponent implements OnInit {
     private userService: UserService ){
 
       this.registerForm = this.formBuilder.group({
-        prenom:['',Validators.required, UsernameValidator.cannotContainSpace],
-        nom:['',Validators.required, UsernameValidator.cannotContainSpace],
+        prenom:['',[Validators.required, UsernameValidator.cannotContainSpace]],
+        nom:['',[Validators.required, UsernameValidator.cannotContainSpace]],
         email:['',[Validators.required,Validators.email]],
         role:['',Validators.required],
         password:['',[Validators.required,Validators.minLength(8)]],
-        passwordConfirm:['', Validators.required]
+        passwordConfirm:['', Validators.required],
+        etat:[0, Validators.required]
+
       })
 
   }
@@ -61,7 +63,10 @@ export class InscriptionComponent implements OnInit {
   }
 
 
+
   onSubmit(): any {
+
+console.log(this.registerForm.value)
     this.userService.AddUser(this.registerForm.value)
     .subscribe(() => {
         console.log('Inscription réussie !')

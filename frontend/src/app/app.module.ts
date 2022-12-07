@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
-import { RechercheComponent } from './component/recherche/recherche.component';
-import { PaginationComponent } from './component/pagination/pagination.component';
 import { PageAdminComponent } from './component/page-admin/page-admin.component';
 import { PageUserComponent } from './component/page-user/page-user.component';
 import { ConnexionComponent } from './component/connexion/connexion.component';
@@ -14,6 +12,7 @@ import { TableauComponent } from './component/tableau/tableau.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PageArchiveComponent } from './page-archive/page-archive.component';
 /* import { Ng2SearchPipeModule } from 'ng2-search-filter'; */
 
 
@@ -23,13 +22,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppComponent,
     HeaderComponent,
     TableauComponent,
-    RechercheComponent,
-    PaginationComponent,
     PageAdminComponent,
     PageUserComponent,
     ConnexionComponent,
     InscriptionComponent,
     ModifierComponent,
+    PageArchiveComponent,
 
   ],
   imports: [

@@ -19,10 +19,14 @@ export class TableauComponent implements OnInit {
   constructor(private UserService: UserService) {}
 
   ngOnInit(): void {
-    this.UserService.GetUsers().subscribe(res => {
-      console.log(res)
-      this.Users =res;
-    });
+    this.UserService.GetUsers().subscribe( 
+      data =>{
+
+        this.Users = data;
+        this.changeArchive = this.Users.filter((e:any)=> e.etat == false)
+               console.log(this.changeArchive)
+              }
+);
   }
   delete(id:any, i:any) {
     console.log(id);
@@ -39,6 +43,20 @@ export class TableauComponent implements OnInit {
 
     const user ={
      role : role
+    }
+
+    this.UserService.updateUser(id,user).subscribe(
+
+      data=>{
+        this.ngOnInit();
+      });
+   }
+
+   changeArchive=(id:any,etat:any)=> {
+    etat == false ? etat =true: etat = false
+
+    const user ={
+     etat : etat
     }
 
     this.UserService.updateUser(id,user).subscribe(

@@ -5,18 +5,21 @@ const userRoute = express.Router();
 let User = require('../model/User');
 // Add User
 userRoute.route('/add-user').post((req, res, next) => {
+
+  console.log(req.body)
   bcrypt.hash(req.body.password, 10)
   .then(hash =>{
     const users = new User({
       prenom: req.body.prenom,
       nom: req.body.nom,
       role: req.body.role,
+      etat: req.body.etat,
       email: req.body.email,
       password: hash,
       imageUrl: req.body.imageUrl
     });
     users.save()
-    .then(()=> res.status(201).json({message: 'Inscription réussi !'}))
+    .then(()=> res.status(201).json({message: "Inscription reussie!"}))
     .catch(error => res.status(400).json({error}));
   })
   .catch(error => res.status(400).json({ error }));

@@ -6,6 +6,8 @@
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
+            <th scope="col">Etat</th>
+
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -15,8 +17,10 @@
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
+            <td>{{ donnee.etat }}</td>
+
             <td>
-              <button class="btn link" (click)="delete(donnee._id, i)">
+              <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
                 <i class="bi bi-archive"></i>
               </button>
               <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
