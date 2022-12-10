@@ -1,0 +1,31 @@
+<app-header></app-header>
+<app-tableau></app-tableau>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modifier</h5>
+               </div>
+                  <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+                          <label for='prenom'>Prenom</label>
+                          <input type="text" formControlName="prenom" class="form-control">
+                          <br />
+                          <label for='nom'>Nom</label>
+                          <input type="text" formControlName="nom" class="form-control">
+                          <br />
+                          <label for='email'>Adresse email</label>
+                          <input type="email" formControlName="email" class="form-control">
+                          <br />
+                          <button type="submit" class="btn btn-success">Sauvegarder</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+          </div>
+      </div>
+  </div>

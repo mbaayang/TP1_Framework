@@ -1,0 +1,23 @@
+
+<header class="header">
+  <div class="menu_admin">
+      <div class="infos">
+          <div>
+              <div class="profil d-flex justify-center">
+                  <img [src]="currentUser.imageUrl" class="img-fluid rounded-circle"  alt="">
+              </div>
+          </div>
+          <div class="nom">
+            <h3>{{ this.currentUser.prenom }} {{ this.currentUser.nom }}</h3>
+            <p>Matricule</p>
+          </div>
+      </div>
+      <div class="end">
+        <a class="m-1" routerLink="/user-profile/:id"><i style="font-size: 25px;" class="bi bi-person-plus"></i> Actives</a>
+          <a class="m-1" routerLink="/archives"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archives</a>
+          <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <i class="bi bi-gear-fill"></i>
+          </button>
+      </div>
+  </div>
+</header>

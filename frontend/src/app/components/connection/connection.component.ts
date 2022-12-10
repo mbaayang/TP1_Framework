@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from './../../service/auth.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-connection',
+  templateUrl: './connection.component.html',
+  styleUrls: ['./connection.component.scss']
+})
+export class ConnectionComponent implements OnInit {
+  title = 'angularvalidate'
+  registerForm: FormGroup;
+  submitted=false;
+  imageUrl!:string;
+
+  constructor(
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    public router: Router
+  ) {
+    this.registerForm = this.formBuilder.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(5)]]
+    });
+  }
+  ngOnInit() {
+    this.imageUrl='../assets/default-avatar.jpg';
+  }
+/*   onSubmit() {
+    this.submitted = true
+
+    if(this.signinForm.invalid){
+      return
+    }
+  } */
+  loginUser() {
+    this.authService.signIn(this.registerForm.value);
+
+    this.submitted = true;
+
+    if(this.registerForm.invalid){
+      return;
+  }
+  }
+}
