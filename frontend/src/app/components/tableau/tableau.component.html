@@ -16,6 +16,7 @@
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
+            <th *ngIf="this.currentUser.role === 'Utilisateur'" scope="col">Date inscription</th>
             <th *ngIf="this.currentUser.role === 'Administrateur'" scope="col">Actions</th>
         </tr>
     </thead>
@@ -27,7 +28,7 @@
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
             <td *ngIf="this.currentUser.role === 'Administrateur'">
-              <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
+              <button class="btn link" (click)="archiver(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
               </button>
               <button class="btn link" data-toggle="modal" data-target="#modifier" (click)="getUserData(donnee._id,donnee.prenom,donnee.nom,donnee.email)">
@@ -37,6 +38,7 @@
                 <i class="bi bi-arrow-left-right" ></i>
               </button>
             </td>
+            <td *ngIf="this.currentUser.role === 'Utilisateur'">{{ donnee.createdAt | date:'d MMMM yyyy à HH:mm'}} </td>
         </tr>
     </tbody>
   </table>

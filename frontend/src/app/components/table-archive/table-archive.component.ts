@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgModel, Validators } from '@angular/forms';
 import { AuthService } from './../../service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-table-archive',
@@ -37,15 +38,25 @@ ngOnInit(): void {
 dearchiveUser=(id:any,etat:any)=> {
 
   etat == true ? etat = false : etat = true
-
    const user ={
    etat : etat
    }
+   Swal.fire({
+    title: 'Désarchivage',
+    text: 'Êtes-vous sûre de vouloir désarchiver ?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Confirmer',
+    cancelButtonText: 'Annuler',
+  }).then((result) => {
+    if (result.value) {
    this.authService.updateUser(id,user).subscribe(
     data=>{
       this.ngOnInit();
-    }
-   );
+    });
+  }else if (result.dismiss === Swal.DismissReason.cancel) {
+  }
+  });
 }
 
 }

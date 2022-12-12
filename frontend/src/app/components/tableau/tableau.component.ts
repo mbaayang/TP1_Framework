@@ -61,7 +61,7 @@ export class TableauComponent implements OnInit {
       });
    }
 
-   changeArchive=(id:any,etat:any)=> {
+   archiver=(id:any,etat:any)=> {
     etat == false ? etat =true: etat = false
     const user ={
      etat : etat
