@@ -13,7 +13,7 @@ export class ConnectionComponent implements OnInit {
   registerForm: FormGroup;
   submitted=false;
   imageUrl!:string;
-errMsg:any
+errMsg:any;
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthService,
@@ -35,6 +35,14 @@ errMsg:any
     }
   } */
   loginUser() {
+
+
+    this.submitted = true;
+
+    if(this.registerForm.invalid){
+      return;
+  }
+
     this.authService.signIn(this.registerForm.value).subscribe((res: any) => {
       localStorage.setItem('access_token', res.token);
       this.authService.getUserProfile(res._id).subscribe((res) => {
@@ -51,10 +59,5 @@ errMsg:any
     
     ;
 
-    this.submitted = true;
-
-    if(this.registerForm.invalid){
-      return;
-  }
   }
 }

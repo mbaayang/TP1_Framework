@@ -102,7 +102,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Email ou mot de passe incorrect!',
+          message: 'L\'email est incorrect!',
         })
       }
       getUser = user
@@ -112,7 +112,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'Le mot de passe est incorrect!',
         })
       }
       let jwtToken = jwt.sign(

@@ -16,7 +16,7 @@
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
-            <th *ngIf="this.currentUser.role === 'Utilisateur'" scope="col">Date inscription</th>
+            <th>Date inscription</th>
             <th *ngIf="this.currentUser.role === 'Administrateur'" scope="col">Actions</th>
         </tr>
     </thead>
@@ -27,6 +27,7 @@
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
+            <td >{{ donnee.createdAt | date:'d MMMM yyyy à HH:mm'}} </td>
             <td *ngIf="this.currentUser.role === 'Administrateur'">
               <button class="btn link" (click)="archiver(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
@@ -38,7 +39,7 @@
                 <i class="bi bi-arrow-left-right" ></i>
               </button>
             </td>
-            <td *ngIf="this.currentUser.role === 'Utilisateur'">{{ donnee.createdAt | date:'d MMMM yyyy à HH:mm'}} </td>
+           
         </tr>
     </tbody>
   </table>
@@ -76,4 +77,3 @@
   <div class="pagination fixed-bottom justify-content-center">
     <pagination-controls (pageChange)="page=$event"></pagination-controls>
   </div>
-

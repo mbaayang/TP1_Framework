@@ -85,12 +85,12 @@ export class InscriptionComponent implements OnInit {
             window.location.reload();
         }
     });
-
+    this.submitted = true;
     if(this.signupForm.invalid){
       return;
     }
 
-    this.submitted = true;
+   
 
     if( pass1 !== pass2)
     {
