@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../service/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-page-admin',
@@ -9,12 +10,15 @@ import { AuthService } from './../../service/auth.service';
 })
 export class PageAdminComponent {
   currentUser: any = {};
-
+  updatePass!: FormGroup;
+  formPassword: Boolean = false;
+  formImage: Boolean = false;
   show:boolean = false
 
   constructor(
     public authService: AuthService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.authService.getUserProfile(id).subscribe((res) => {
@@ -32,5 +36,19 @@ export class PageAdminComponent {
 
   public afficher1():void{
     this.show = false
+  }
+
+  showPassword(){
+    return this.formPassword = true;
+  }
+  hidePassword(){
+    return this.formPassword = false;
+  }
+
+  showImage(){
+    return this.formImage = true;
+  }
+  hideImage(){
+    return this.formImage = false;
   }
 }

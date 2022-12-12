@@ -1,5 +1,5 @@
 <div class="my-5">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <div class="input-group">
     <span class="input-group-text" id="inputGroupPrepend2"><i class="bi bi-search"></i></span>
     <input
@@ -9,7 +9,7 @@
       [(ngModel)]="filterTerm"/>
     </div>
   </div>
-  <table class="table table-hover w-75 my-5">
+  <table class="table table-hover w-75 my-3">
     <thead>
         <tr class="line">
             <th scope="col">Prenom</th>
@@ -20,7 +20,7 @@
         </tr>
     </thead>
 
-    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:7, currentPage:page, totalItems:totalLenght}">
+    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:6, currentPage:page, totalItems:totalLenght}">
       <tr *ngIf="donnee._id !== this.currentUser._id">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>

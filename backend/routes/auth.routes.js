@@ -9,7 +9,7 @@ mongoose = require('mongoose')
 multer = require('multer')
 
 // Multer File upload settings
-const DIR = './public/'
+const DIR = './images/'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -66,7 +66,7 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: url + '/public/' + req.file.filename,
+          imageUrl: url + '/images/' + req.file.filename,
           matricule: req.body.matricule,
         })
         user

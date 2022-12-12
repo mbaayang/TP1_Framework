@@ -12,12 +12,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { TableauComponent } from './components/tableau/tableau.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PageAdminComponent } from './components/page-admin/page-admin.component';
-import { PageUserComponent } from './components/page-user/page-user.component';
-import { TableUserComponent } from './components/table-user/table-user.component';
 import { TableArchiveComponent } from './components/table-archive/table-archive.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ModifierComponent } from './components/modifier/modifier.component';
-import { PageArchiveComponent } from './components/page-archive/page-archive.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +24,8 @@ import { PageArchiveComponent } from './components/page-archive/page-archive.com
     HeaderComponent,
     TableauComponent,
     PageAdminComponent,
-    PageUserComponent,
-    TableUserComponent,
     TableArchiveComponent,
     ModifierComponent,
-    PageArchiveComponent
   ],
   imports: [
     BrowserModule,

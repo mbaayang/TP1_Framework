@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const api = require('./routes/auth.routes')
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/Users')
+  .connect('mongodb+srv://mbayang:mbayang07@cluster0.tzug7mq.mongodb.net/User?retryWrites=true&w=majority')
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -26,7 +26,7 @@ app.use(
 app.use(cors())
 
 // Serve static resources
-app.use('/public', express.static('public'))
+app.use('/images', express.static('images'))
 app.use('/api', api)
 
 // Error favicon.ico

@@ -58,12 +58,11 @@ export class InscriptionComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  //générer matricule pour administrateur
-  /* matriculeGenerate:any = "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1));
-  this.signupForm.controls.matricule.setValue(matriculeGenerate); */
-
 
   registerUser() {
+    let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
+    let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
+    //générer matricule pour administrateur et utilisateur
     let matriculeGenerate;
     this.signupForm.value.role =="Administrateur" ? matriculeGenerate= "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1))
       :matriculeGenerate= "MUT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1));
@@ -79,27 +78,20 @@ export class InscriptionComponent implements OnInit {
           case HttpEventType.ResponseHeader:
             console.log('Response header has been received!');
             break;
-          /* case HttpEventType.UploadProgress:
-            this.percentDone = Math.round((event.loaded / event.total) * 100);
-            console.log(`Uploaded! ${this.percentDone}%`);
-            break; */
           case HttpEventType.Response:
             console.log('User successfully created!', event.body);
             this.percentDone = false;
-            /* this.router.navigate([]); */
             Swal.fire('Inscription réussie !'),
             window.location.reload();
         }
-
     });
-    this.submitted = true;
-    this.signupForm.reset();
-    Swal.fire('Inscription réussie !');
+
     if(this.signupForm.invalid){
       return;
     }
-    let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
-    let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
+
+    this.submitted = true;
+
     if( pass1 !== pass2)
     {
       this.verifPass = false;
