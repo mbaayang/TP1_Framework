@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tableau.component.scss']
 })
 export class TableauComponent implements OnInit {
+  currentUser: any = {};
 
   filterTerm!: string;
 
@@ -24,6 +25,12 @@ export class TableauComponent implements OnInit {
 
 
   constructor(public authService: AuthService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone,public formBuilder: FormBuilder) {
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.authService.getUserProfile(id).subscribe((res) => {
+      this.currentUser = res.msg;
+    });
+
+    
 
     this.updateForm = this.formBuilder.group({
       prenom: ['', [Validators.required]],

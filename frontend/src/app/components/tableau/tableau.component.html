@@ -16,17 +16,17 @@
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
-            <th scope="col">Actions</th>
+            <th *ngIf="this.currentUser.role === 'Administrateur'" scope="col">Actions</th>
         </tr>
     </thead>
 
-    <tbody>
-        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
+    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:7, currentPage:page, totalItems:totalLenght}">
+      <tr *ngIf="donnee._id !== this.currentUser._id">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
-            <td>
+            <td *ngIf="this.currentUser.role === 'Administrateur'">
               <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
               </button>

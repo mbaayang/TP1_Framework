@@ -14,7 +14,7 @@
       </div>
       <div class="end">
         <a class="m-1" (click)="afficher1()"><i style="font-size: 25px;" class="bi bi-person-plus"></i> Actifs</a>
-          <a class="m-1" (click)="afficher()"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archivés</a>
+          <a *ngIf="this.currentUser.role === 'Administrateur'" class="m-1" (click)="afficher()"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archivés</a>
           <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
               <i class="bi bi-gear-fill"></i>
           </button>
