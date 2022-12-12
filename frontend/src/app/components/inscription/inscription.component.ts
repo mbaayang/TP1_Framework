@@ -86,12 +86,10 @@ export class InscriptionComponent implements OnInit {
         }
     });
 
+    this.submitted = true;
     if(this.signupForm.invalid){
       return;
     }
-
-    this.submitted = true;
-
     if( pass1 !== pass2)
     {
       this.verifPass = false;
