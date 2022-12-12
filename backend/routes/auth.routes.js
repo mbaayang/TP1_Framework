@@ -73,14 +73,15 @@ router.post(
         user
           .save()
           .then((response) => {
+            console.log(response);
             res.status(201).json({
               message: 'Inscription réussie !',
               result: response,
             })
           })
           .catch((error) => {
-            res.status(500).json({
-              error: error,
+            res.status(409).json({
+              error: error.message.split("email:")[1],
             })
           })
       })
@@ -98,7 +99,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'L\'email est incorrect !',
         })
       }
       getUser = user
@@ -107,7 +108,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'Le mot de passe est incorrect',
         })
       }
       let jwtToken = jwt.sign(

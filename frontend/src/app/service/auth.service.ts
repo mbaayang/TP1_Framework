@@ -21,16 +21,7 @@ export class AuthService {
  GetUsers() {
   return this.http.get(`${this.endpoint}`);
 }
-// Get single object
-GetUser(id: any): Observable<any> {
-  let API_URL = `${this.endpoint}/user-profile/${id}`;
-  return this.http.get(API_URL, { headers: this.headers }).pipe(
-    map((res: any) => {
-      return res || {};
-    }),
-    catchError(this.handleError)
-  );
-}
+
 
  // Get single object
  GetUse(id: any): Observable<any> {
@@ -79,13 +70,6 @@ deleteUser(id: any): Observable<any> {
   signIn(user: User) {
     return this.http
       .post<any>(`${this.endpoint}/signin`, user)
-      .subscribe((res: any) => {
-        localStorage.setItem('access_token', res.token);
-        this.getUserProfile(res._id).subscribe((res) => {
-          this.currentUser = res;
-          this.router.navigate(['user-profile/' + res.msg._id]);
-        });
-      });
   }
   getToken() {
     return localStorage.getItem('access_token');

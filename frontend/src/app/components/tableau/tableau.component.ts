@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from './../../service/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UsernameValidator } from 'src/app/username.validator';
 import Swal from 'sweetalert2';
 
 
@@ -20,6 +21,7 @@ export class TableauComponent implements OnInit {
   totalLenght: any;
   page : number=1;
   updateForm: FormGroup;
+  submitted=false;
 
 
   constructor(public authService: AuthService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone,public formBuilder: FormBuilder) {
@@ -31,9 +33,9 @@ export class TableauComponent implements OnInit {
     
 
     this.updateForm = this.formBuilder.group({
-      prenom: ['', [Validators.required]],
-      nom: ['', [Validators.required]],
-      email: ['', [Validators.required]]
+      prenom: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
+      nom: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
+      email: ['', [Validators.required, UsernameValidator.cannotContainSpace]]
     })
 
      }
@@ -102,6 +104,10 @@ export class TableauComponent implements OnInit {
   nom : this.updateForm.value.nom,
   email: this.updateForm.value.email
  }
+ this.submitted = true;
+ if(this.updateForm.invalid){
+   return;
+ }
     this.authService.updateUser(id, user).subscribe(
       data=>{
         this.ngOnInit();
@@ -109,7 +115,6 @@ export class TableauComponent implements OnInit {
         setTimeout(()=>{Swal.fire('Modification réussie !')}, 5000);
         window.location.reload();
       });
-
   }
 
   }

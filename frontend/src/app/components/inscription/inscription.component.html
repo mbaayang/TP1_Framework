@@ -2,8 +2,8 @@
     <form [formGroup]="signupForm" (ngSubmit)="registerUser()" id="leform" class="row g-3 my-5"
         enctype="multipart/form-data">
         <h2 class="text-center">S'inscrire</h2>
-        <div *ngIf="!verifPass" class="alert alert-danger" role="alert">
-            Les mots de passe ne correspondent pas!
+        <div *ngIf="errMsg == true" class="alert alert-danger" role="alert">
+            <strong>Erreur</strong> Email déjà existant !
         </div>
         <div class=" col-md-6">
             <label for="nom">Nom</label>
@@ -76,12 +76,12 @@
             <label for="passwordConfirm">Confirmation Password</label>
             <input [ngClass]="{'is-invalid':submitted && signupForm.controls['password'].errors}"
                 formControlName="passwordConfirm" type="password" class="form-control" autocomplete="on" id="pass2">
-            <div *ngIf="submitted && signupForm.controls['password'].errors" class="text-danger">
-                <div *ngIf="submitted && signupForm.controls['password'].errors['required']">
-                    Le Password est necessaire!
+            <div *ngIf="submitted && signupForm.controls['passwordConfirm'].errors" class="text-danger">
+                <div *ngIf="submitted && signupForm.controls['passwordConfirm'].errors['required']">
+                    Veillez confirmer le mot de passe
                 </div>
-                <div *ngIf="submitted && signupForm.controls['password'].errors['minlength']">
-                    Saisi au moins 8 caracteres
+                <div *ngIf="submitted && signupForm.controls['passwordConfirm'].errors['mustMatch']">
+                    Les mots de passes ne correspondent pas
                 </div>
             </div>
         </div>

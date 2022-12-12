@@ -3,8 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../service/auth.service';
 import { Router } from '@angular/router';
 import { UsernameValidator } from 'src/app/username.validator';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { MustMatch } from 'src/app/MustMatch';
 
 @Component({
   selector: 'app-inscription',
@@ -18,7 +19,7 @@ export class InscriptionComponent implements OnInit {
   verifPass:any = true;
   preview!: string;
   percentDone?: any = 0;
-
+  errMsg:Boolean = false;
 
   constructor(public formBuilder: FormBuilder,
               public authService: AuthService,
@@ -34,8 +35,8 @@ export class InscriptionComponent implements OnInit {
         etat:[0, Validators.required],
         imageUrl:[null],
         matricule: ['']
-    });
-  }
+    },  { validator: MustMatch('password', 'passwordConfirm')}
+  )}
 
   listDeroulant=['Administrateur','Utilisateur'];
 
@@ -60,8 +61,11 @@ export class InscriptionComponent implements OnInit {
 
 
   registerUser() {
-    let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
-    let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
+    this.submitted = true;
+    if(this.signupForm.invalid){
+      return;
+    }
+    this.submitted=false
     //générer matricule pour administrateur et utilisateur
     let matriculeGenerate;
     this.signupForm.value.role =="Administrateur" ? matriculeGenerate= "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1))
@@ -73,30 +77,27 @@ export class InscriptionComponent implements OnInit {
       this.signupForm.value.etat,this.signupForm.value.imageUrl,this.signupForm.value.matricule).subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Sent:
-            console.log('Request has been made!');
+            console.log('Requete éxecutée!');
             break;
           case HttpEventType.ResponseHeader:
             console.log('Response header has been received!');
             break;
           case HttpEventType.Response:
+            console.log(HttpEventType.Response);
+            
             console.log('User successfully created!', event.body);
             this.percentDone = false;
             Swal.fire('Inscription réussie !'),
             window.location.reload();
+/*             break;
+            default:
+              Swal.fire('Email existe deja !') */
         }
+          if (HttpErrorResponse) {      
+          this.errMsg = true;
+        }  
     });
 
-    this.submitted = true;
-    if(this.signupForm.invalid){
-      return;
-    }
-    if( pass1 !== pass2)
-    {
-      this.verifPass = false;
-      this.signupForm = this.formBuilder.group(
-        {password:[''],passwordConfirm:['']}
-      )
-      setTimeout(()=>{ this.verifPass = true}, 5000);
+
     }
   }
-}

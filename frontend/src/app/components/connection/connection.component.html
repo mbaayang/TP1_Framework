@@ -1,6 +1,9 @@
    <body>  
     <div class="row g-3 my-5">
         <form class="row g-3 d-flex justify-content-center bg-light" [formGroup]="registerForm" (ngSubmit)="loginUser()" >
+          <ng-container *ngIf="this.errMsg">
+            <div class="alert alert-danger" role="alert">{{errMsg}}</div>
+          </ng-container>
           <h1 class="text-center">Connexion</h1>
           <div class="profil justify-center">
             <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
