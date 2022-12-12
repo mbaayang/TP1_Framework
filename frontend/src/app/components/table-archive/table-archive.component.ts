@@ -34,9 +34,6 @@ ngOnInit(): void {
 
 }
 
-
-
-
 dearchiveUser=(id:any,etat:any)=> {
 
   etat == true ? etat = false : etat = true

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './../../service/auth.service';
 import { Router } from '@angular/router';
 import { UsernameValidator } from 'src/app/username.validator';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,6 +16,9 @@ export class InscriptionComponent implements OnInit {
   submitted=false;
   check= false;
   verifPass:any = true;
+  preview!: string;
+  percentDone?: any = 0;
+
 
   constructor(public formBuilder: FormBuilder,
               public authService: AuthService,
@@ -28,6 +32,8 @@ export class InscriptionComponent implements OnInit {
         password:['',[Validators.required,Validators.minLength(8)]],
         passwordConfirm: ['', Validators.required],
         etat:[0, Validators.required],
+        imageUrl:[null],
+        matricule: ['']
     });
   }
 
@@ -35,17 +41,57 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {}
 
+  // Image Preview
+  uploadFile(event: any) {
+
+    const file = event.target.files[0];
+    this.signupForm.patchValue({
+      imageUrl: file,
+    });
+    this.signupForm.get('imageUrl')?.updateValueAndValidity();
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
 
   registerUser() {
-    this.authService.signUp(this.signupForm.value).subscribe((res) => {
-      if (res.result) {
-        this.signupForm.reset();
-        this.router.navigate([]);
-        Swal.fire('Inscription réussie !');
-      }
-    });
     let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
     let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
+    //générer matricule pour administrateur et utilisateur
+    let matriculeGenerate;
+    this.signupForm.value.role =="Administrateur" ? matriculeGenerate= "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1))
+      :matriculeGenerate= "MUT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1));
+      this.signupForm.controls.matricule.setValue(matriculeGenerate)
+
+    this.authService.signUp(this.signupForm.value.prenom, this.signupForm.value.nom,
+      this.signupForm.value.email, this.signupForm.value.role, this.signupForm.value.password,
+      this.signupForm.value.etat,this.signupForm.value.imageUrl,this.signupForm.value.matricule).subscribe((event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            console.log('Request has been made!');
+            break;
+          case HttpEventType.ResponseHeader:
+            console.log('Response header has been received!');
+            break;
+          case HttpEventType.Response:
+            console.log('User successfully created!', event.body);
+            this.percentDone = false;
+            Swal.fire('Inscription réussie !'),
+            window.location.reload();
+        }
+    });
+
+    if(this.signupForm.invalid){
+      return;
+    }
+
+    this.submitted = true;
+
     if( pass1 !== pass2)
     {
       this.verifPass = false;
@@ -54,12 +100,5 @@ export class InscriptionComponent implements OnInit {
       )
       setTimeout(()=>{ this.verifPass = true}, 5000);
     }
-
-    this.submitted = true;
-    if(this.signupForm.invalid){
-      return;
-    }
-/*     this.registerForm.reset(); */
   }
-
-  }
+}

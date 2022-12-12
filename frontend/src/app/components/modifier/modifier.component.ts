@@ -18,7 +18,7 @@ export class ModifierComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private activatedRoute: ActivatedRoute) {
-      this.getId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getId = this.activatedRoute.snapshot.paramMap.get('id');
     this.authService.GetUse(this.getId).subscribe(res => {
       this.updateForm.setValue({
         prenom: res['prenom'],

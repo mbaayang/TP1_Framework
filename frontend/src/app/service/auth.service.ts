@@ -59,10 +59,22 @@ deleteUser(id: any): Observable<any> {
 }
 
   // Sign-up
-  signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register-user`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
+  signUp(prenom: string, nom: string, email: string, role: string, password: string, etat: boolean, imageUrl: File, matricule: String): Observable<any> {
+    var formData: any = new FormData();
+      formData.append('prenom', prenom);
+      formData.append('nom', nom);
+      formData.append('email', email);
+      formData.append('role', role);
+      formData.append('password', password);
+      formData.append('etat', etat);
+      formData.append('imageUrl', imageUrl);
+      formData.append('matricule', matricule);
+    return this.http.post<User>(`${this.endpoint}/register-user`, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
+
   // Sign-in
   signIn(user: User) {
     return this.http

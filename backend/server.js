@@ -26,8 +26,11 @@ app.use(
 app.use(cors())
 
 // Serve static resources
-app.use('/public', express.static('public'))
+app.use('/images', express.static('images'))
 app.use('/api', api)
+
+// Error favicon.ico
+app.get('/favicon.ico', (req, res) => res.status(204))
 
 // Define PORT
 const port = process.env.PORT || 4000

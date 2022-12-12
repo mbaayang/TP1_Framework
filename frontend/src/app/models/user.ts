@@ -7,4 +7,5 @@ export class User {
   password!: String;
   etat!: boolean;
   imageUrl!: String;
+  matricule!: String;
 }

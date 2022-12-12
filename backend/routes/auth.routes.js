@@ -5,10 +5,45 @@ const router = express.Router()
 const userSchema = require('../models/User')
 const authorize = require('../middlewares/auth')
 const { check, validationResult } = require('express-validator')
+mongoose = require('mongoose')
+multer = require('multer')
+
+// Multer File upload settings
+const DIR = './images/'
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR)
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(' ').join('-')
+    cb(null, fileName)
+  },
+})
+
+// Multer Mime Type Validation
+var upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5,
+  },
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype == 'image/png' ||
+      file.mimetype == 'image/jpg' ||
+      file.mimetype == 'image/jpeg'
+    ) {
+      cb(null, true)
+    } else {
+      cb(null, false)
+      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'))
+    }
+  },
+})
 
 // Sign-up
 router.post(
-  '/register-user',
+  '/register-user', upload.single('imageUrl'),
   [
     check('nom').not().isEmpty(),
     check('prenom').not().isEmpty(),
@@ -23,6 +58,8 @@ router.post(
     console.log(req.body)
 
       bcrypt.hash(req.body.password, 10).then((hash) => {
+
+        const url = req.protocol + '://' + req.get('host')
         const user = new userSchema({
           prenom: req.body.prenom,
           nom: req.body.nom,
@@ -30,13 +67,14 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: req.body.imageUrl,
+          imageUrl: url + '/images/' + req.file.filename,
+          matricule: req.body.matricule,
         })
         user
           .save()
           .then((response) => {
             res.status(201).json({
-              message: 'User successfully created!',
+              message: 'Inscription réussie !',
               result: response,
             })
           })
@@ -49,6 +87,7 @@ router.post(
   },
 )
 
+
 // Sign-in
 router.post('/signin', (req, res, next) => {
   let getUser
@@ -59,7 +98,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Authentication failed',
+          message: 'Authentification échouée',
         })
       }
       getUser = user
@@ -68,7 +107,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Authentication failed',
+          message: 'Authentification échouée',
         })
       }
       let jwtToken = jwt.sign(
@@ -105,7 +144,8 @@ router.route('/').get((req, res, next) => {
   })
 })
 
-// Get Book
+
+// Get User
 router.route('/read-user/:id').get((req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
@@ -115,6 +155,9 @@ router.route('/read-user/:id').get((req, res) => {
     }
   });
 });
+
+
+
 
 // Get Single User
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
@@ -141,7 +184,7 @@ router.route('/update-user/:id').put((req, res, next) => {
         return next(error)
       } else {
         res.json(data)
-        console.log('Modification!')
+        console.log('Modification réussie !')
       }
     },
   )

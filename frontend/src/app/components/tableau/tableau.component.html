@@ -1,5 +1,5 @@
 <div class="my-5">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <div class="input-group">
     <span class="input-group-text" id="inputGroupPrepend2"><i class="bi bi-search"></i></span>
     <input
@@ -16,21 +16,21 @@
             <th scope="col">Nom</th>
             <th scope="col">Email</th>
             <th scope="col">Rôle</th>
-            <th scope="col">Actions</th>
+            <th *ngIf="this.currentUser.role === 'Administrateur'" scope="col">Actions</th>
         </tr>
     </thead>
 
-    <tbody>
-        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
+    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:6, currentPage:page, totalItems:totalLenght}">
+      <tr *ngIf="donnee._id !== this.currentUser._id">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
-            <td>
+            <td *ngIf="this.currentUser.role === 'Administrateur'">
               <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
               </button>
-              <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
+              <button class="btn link" data-toggle="modal" data-target="#modifier" (click)="getUserData(donnee._id,donnee.prenom,donnee.nom,donnee.email)">
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button class="btn link" (click)="changeRole(donnee._id, donnee.role)">
@@ -42,6 +42,36 @@
   </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modifier</h5>
+               </div>
+                  <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+                          <label for='prenom'>Prenom</label>
+                          <input type="text" formControlName="prenom" class="form-control">
+                          <br />
+                          <label for='nom'>Nom</label>
+                          <input type="text" formControlName="nom" class="form-control">
+                          <br />
+                          <label for='email'>Adresse email</label>
+                          <input type="email" formControlName="email" class="form-control">
+                          <br />
+                          <button type="submit" class="btn btn-success">Sauvegarder</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+          </div>
+      </div>
+  </div>
+
+
   <div class="pagination fixed-bottom justify-content-center">
     <pagination-controls (pageChange)="page=$event"></pagination-controls>
-  </div> 
+  </div>
+

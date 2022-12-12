@@ -9,11 +9,13 @@ let userSchema = new Schema({
     role: { type: String, required:true },
     password: { type: String, required:true },
     etat: { type: Boolean, required:false },
-    imageUrl: { type: String, required:false }
+    imageUrl: { type: String, required:false },
+    matricule: { type: String, required:true }
 }, {timestamps: true},
 {
     collection: 'personnes'
 })
 
-userSchema.plugin(uniqueValidator, { message: 'Email already in use.' });
+userSchema.plugin(uniqueValidator, { message: 'Email existe déjà.' });
+
 module.exports = mongoose.model('personnes', userSchema)

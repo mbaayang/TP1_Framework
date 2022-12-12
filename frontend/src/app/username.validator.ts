@@ -1,16 +1,16 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';  
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-export class UsernameValidator {  
-    static cannotContainSpace(control: AbstractControl) : ValidationErrors | null 
-    {  
-       
+export class UsernameValidator {
+    static cannotContainSpace(control: AbstractControl) : ValidationErrors | null
+    {
 
-        if((control.value as string).indexOf(' ') >= 0){  
-            return {cannotContainSpace: true}  
-        }  
-    
-        return null;  
-    }  
+
+        if((control.value as string).startsWith(' ')){
+            return {cannotContainSpace: true}
+        }
+
+        return null;
+    }
 
     static ValidateString(control: FormControl) {
     let pattern = /^\w/; // can change regex with your requirement
@@ -24,5 +24,4 @@ export class UsernameValidator {
     return null;
 }
 
-    
-}  
+}
