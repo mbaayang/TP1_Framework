@@ -92,17 +92,22 @@ router.post(
 router.post('/signin', (req, res, next) => {
   let getUser
   userSchema
+ /*  userSchema.path('email').validate(() => {
+    return true 
+  }, 'votre email est incorrect'
+  ) */
     .findOne({
       email: req.body.email,
     })
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'Email ou mot de passe incorrect!',
         })
       }
       getUser = user
       return bcrypt.compare(req.body.password, user.password)
+    
     })
     .then((response) => {
       if (!response) {

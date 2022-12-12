@@ -13,7 +13,7 @@ export class ConnectionComponent implements OnInit {
   registerForm: FormGroup;
   submitted=false;
   imageUrl!:string;
-
+errMsg:any
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthService,
@@ -35,7 +35,21 @@ export class ConnectionComponent implements OnInit {
     }
   } */
   loginUser() {
-    this.authService.signIn(this.registerForm.value);
+    this.authService.signIn(this.registerForm.value).subscribe((res: any) => {
+      localStorage.setItem('access_token', res.token);
+      this.authService.getUserProfile(res._id).subscribe((res) => {
+        this.authService.currentUser = res;
+        this.router.navigate(['user-profile/' + res.msg._id]);
+      });
+    },
+    error =>{
+      this.errMsg= error.error.message
+      console.log(error.error.message);
+    }
+
+    );
+    
+    ;
 
     this.submitted = true;
 

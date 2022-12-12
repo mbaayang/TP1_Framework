@@ -4,7 +4,13 @@
           <h1 class="text-center">Connexion</h1>
           <div class="profil justify-center">
             <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
-          </div>           
+          </div>  
+          
+                 <ng-container *ngIf="this.errMsg">
+<div class="alert alert-danger">
+{{errMsg}}
+</div>
+</ng-container >
           <div class="form-group inputs">
             <label for="email">Email Address</label>
             <input [ngClass]="{'is-invalid':submitted && registerForm.controls['email'].errors}" formControlName="email" type="email" class="form-control">
