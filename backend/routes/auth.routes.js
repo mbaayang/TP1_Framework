@@ -108,7 +108,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Le mot de passe est incorrect',
+          message: 'Le mot de passe est incorrect !',
         })
       }
       let jwtToken = jwt.sign(
