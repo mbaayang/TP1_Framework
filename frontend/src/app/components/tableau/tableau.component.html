@@ -9,7 +9,7 @@
       [(ngModel)]="filterTerm"/>
     </div>
   </div>
-  <table class="table table-hover w-75 my-3">
+  <table class="table table-hover w-75 my-5">
     <thead>
         <tr class="line">
             <th scope="col">Prenom</th>
@@ -30,7 +30,7 @@
               <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
               </button>
-              <button class="btn link" data-toggle="modal" data-target="#modifier" routerLink="/modif/{{donnee._id}}">
+              <button class="btn link" data-toggle="modal" data-target="#modifier" (click)="getUserData(donnee._id,donnee.prenom,donnee.nom,donnee.email)">
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button class="btn link" (click)="changeRole(donnee._id, donnee.role)">
@@ -42,6 +42,38 @@
   </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modifier" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modifier</h5>
+               </div>
+                  <div class="modal-body">
+                      <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+                          <label for='prenom'>Prenom</label>
+                          <input type="text" formControlName="prenom" class="form-control">
+                          <br />
+                          <label for='nom'>Nom</label>
+                          <input type="text" formControlName="nom" class="form-control">
+                          <br />
+                          <label for='email'>Adresse email</label>
+                          <input type="email" formControlName="email" class="form-control">
+                          <br />
+                          <button type="submit" class="btn btn-success">Sauvegarder</button>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                  </div>
+          </div>
+      </div>
+  </div>
+
+
   <div class="pagination fixed-bottom justify-content-center">
     <pagination-controls (pageChange)="page=$event"></pagination-controls>
-  </div> 
+  </div>
+
+
+

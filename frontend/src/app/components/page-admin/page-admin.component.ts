@@ -10,6 +10,8 @@ import { AuthService } from './../../service/auth.service';
 export class PageAdminComponent {
   currentUser: any = {};
 
+  show:boolean = false
+
   constructor(
     public authService: AuthService,
     private actRoute: ActivatedRoute
@@ -22,5 +24,13 @@ export class PageAdminComponent {
 
   logout() {
     this.authService.doLogout()
+  }
+
+  public afficher():void{
+    this.show = true
+  }
+
+  public afficher1():void{
+    this.show = false
   }
 }

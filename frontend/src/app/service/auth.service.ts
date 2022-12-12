@@ -21,16 +21,7 @@ export class AuthService {
  GetUsers() {
   return this.http.get(`${this.endpoint}`);
 }
-// Get single object
-GetUser(id: any): Observable<any> {
-  let API_URL = `${this.endpoint}/user-profile/${id}`;
-  return this.http.get(API_URL, { headers: this.headers }).pipe(
-    map((res: any) => {
-      return res || {};
-    }),
-    catchError(this.handleError)
-  );
-}
+
 
  // Get single object
  GetUse(id: any): Observable<any> {
@@ -59,8 +50,7 @@ deleteUser(id: any): Observable<any> {
 }
 
   // Sign-up
-  signUp(prenom: string, nom: string, email: string, role: string, password: string, etat: boolean, imageUrl: File): Observable<any> {
-    /* let api = `${this.endpoint}/register-user`; */
+  signUp(prenom: string, nom: string, email: string, role: string, password: string, etat: boolean, imageUrl: File, matricule: String): Observable<any> {
     var formData: any = new FormData();
       formData.append('prenom', prenom);
       formData.append('nom', nom);
@@ -69,24 +59,14 @@ deleteUser(id: any): Observable<any> {
       formData.append('password', password);
       formData.append('etat', etat);
       formData.append('imageUrl', imageUrl);
-    /* return this.http.post(api, formData).pipe(catchError(this.handleError)); */
+      formData.append('matricule', matricule);
     return this.http.post<User>(`${this.endpoint}/register-user`, formData, {
       reportProgress: true,
       observe: 'events',
     });
   }
 
-    // Create User
-    /* addUser(name: string, profileImage: File): Observable<any> {
-      var formData: any = new FormData();
-      formData.append('name', name);
-      formData.append('avatar', profileImage);
 
-      return this.http.post<User>(`${this.baseURL}/create-user`, formData, {
-        reportProgress: true,
-        observe: 'events',
-      });
-    } */
   // Sign-in
   signIn(user: User) {
     return this.http

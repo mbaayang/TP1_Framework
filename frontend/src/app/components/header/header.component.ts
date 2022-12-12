@@ -20,9 +20,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  /* imageUrl!:string; */
 
-  ngOnInit() {
-    /* this.imageUrl='../assets/default-avatar.jpg'; */
-  }
+  ngOnInit() { }
 }

@@ -67,6 +67,7 @@ router.post(
           password: hash,
           etat: req.body.etat,
           imageUrl: url + '/public/' + req.file.filename,
+          matricule: req.body.matricule,
         })
         user
           .save()
@@ -96,7 +97,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Authentication failed',
+          message: 'Authentification échouée',
         })
       }
       getUser = user
@@ -105,7 +106,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Authentication failed',
+          message: 'Authentification échouée',
         })
       }
       let jwtToken = jwt.sign(
@@ -126,7 +127,7 @@ router.post('/signin', (req, res, next) => {
     })
     .catch((err) => {
       return res.status(401).json({
-        message: 'Authentication failed',
+        message: 'Authentification échouée',
       })
     })
 })
@@ -142,8 +143,8 @@ router.route('/').get((req, res, next) => {
   })
 })
 
-// Get Book
-router.route('/read-user/:id').get((req, res) => {
+// Get User
+/* router.route('/read-user/:id').get((req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -151,7 +152,7 @@ router.route('/read-user/:id').get((req, res) => {
       res.json(data);
     }
   });
-});
+}); */
 
 // Get Single User
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
@@ -178,7 +179,7 @@ router.route('/update-user/:id').put((req, res, next) => {
         return next(error)
       } else {
         res.json(data)
-        console.log('Modification!')
+        console.log('Modification réussie !')
       }
     },
   )

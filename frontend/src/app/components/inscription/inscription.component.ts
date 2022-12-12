@@ -19,6 +19,7 @@ export class InscriptionComponent implements OnInit {
   preview!: string;
   percentDone?: any = 0;
 
+
   constructor(public formBuilder: FormBuilder,
               public authService: AuthService,
               public router: Router
@@ -32,6 +33,7 @@ export class InscriptionComponent implements OnInit {
         passwordConfirm: ['', Validators.required],
         etat:[0, Validators.required],
         imageUrl:[null],
+        matricule: ['']
     });
   }
 
@@ -56,11 +58,20 @@ export class InscriptionComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  //générer matricule pour administrateur
+  /* matriculeGenerate:any = "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1));
+  this.signupForm.controls.matricule.setValue(matriculeGenerate); */
+
 
   registerUser() {
+    let matriculeGenerate;
+    this.signupForm.value.role =="Administrateur" ? matriculeGenerate= "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1))
+      :matriculeGenerate= "MUT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1));
+      this.signupForm.controls.matricule.setValue(matriculeGenerate)
+
     this.authService.signUp(this.signupForm.value.prenom, this.signupForm.value.nom,
       this.signupForm.value.email, this.signupForm.value.role, this.signupForm.value.password,
-      this.signupForm.value.etat,this.signupForm.value.imageUrl).subscribe((event: HttpEvent<any>) => {
+      this.signupForm.value.etat,this.signupForm.value.imageUrl,this.signupForm.value.matricule).subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Sent:
             console.log('Request has been made!');
@@ -75,13 +86,11 @@ export class InscriptionComponent implements OnInit {
           case HttpEventType.Response:
             console.log('User successfully created!', event.body);
             this.percentDone = false;
-            this.router.navigate([]);
+            /* this.router.navigate([]); */
+            Swal.fire('Inscription réussie !'),
+            window.location.reload();
         }
-      /* if (res.result) {
-        this.signupForm.reset();
-        this.router.navigate([]);
-        Swal.fire('Inscription réussie !');
-      } */
+
     });
     this.submitted = true;
     this.signupForm.reset();

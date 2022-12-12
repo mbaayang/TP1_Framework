@@ -1,1 +1,40 @@
-<p>table-user works!</p>
+<div class="my-5">
+  <div class="form-group col-md-4">
+    <div class="input-group">
+    <span class="input-group-text" id="inputGroupPrepend2"><i class="bi bi-search"></i></span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Rechercher un utilisateur"
+      [(ngModel)]="filterTerm"/>
+    </div>
+  </div>
+  <table class="table table-hover w-75 my-5">
+    <thead>
+        <tr class="line">
+            <th scope="col">Prenom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rôle</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:5, currentPage:page, totalItems:totalLenght}">
+            <td>{{ donnee.prenom }}</td>
+            <td>{{ donnee.nom }}</td>
+            <td>{{ donnee.email }}</td>
+            <td>{{ donnee.role }}</td>
+
+        </tr>
+    </tbody>
+  </table>
+</div>
+
+  <div class="pagination fixed-bottom justify-content-center">
+    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+  </div>
+
+
+
