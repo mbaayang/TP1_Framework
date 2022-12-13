@@ -99,7 +99,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'L\'email est incorrect !',
+          message: 'Compte non existant !',
         })
       }
       getUser = user
