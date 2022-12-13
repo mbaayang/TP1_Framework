@@ -1,13 +1,10 @@
 <div class="container w-50 my-5 bg-light">
     <form [formGroup]="signupForm" (ngSubmit)="registerUser()" id="leform" class="row g-3 my-5"
         enctype="multipart/form-data">
-<!--         <div *ngIf="errMsg == true" class="alert alert-danger" role="alert">
-            <strong>Erreur</strong> Email déjà existant !
-        </div> -->
+        <h2 class="text-center">Inscription</h2>
         <ng-container *ngIf="this.errMsg">
-            <div class="alert alert-danger" role="alert">{{errMsg}}</div>
+            <div class="alert alert-danger" role="alert"><strong> Erreur </strong> {{errMsg}}</div>
           </ng-container>
-        <h2 class="text-center">S'inscrire</h2>
         <div class=" col-md-6">
             <label for="nom">Nom</label>
             <input [ngClass]="{'is-invalid':submitted && signupForm.controls['nom'].errors}" formControlName="nom"
@@ -90,7 +87,7 @@
         </div>
             <div class="col-md-6">
                 <label for="imageUrl">Profil</label>
-                <input formControlName="imageUrl" type="file" (change)="uploadFile($event)" class="form-control">
+                <input formControlName="imageUrl" type="file" (change)="uploadFile($event)" class="form-control"  accept="image/png, image/gif, image/jpeg, image/jpg" >
             </div>
 
             <div class="form-group">
