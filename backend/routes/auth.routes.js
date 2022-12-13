@@ -115,6 +115,13 @@ router.post('/signin', (req, res, next) => {
           message: 'Le mot de passe est incorrect!',
         })
       }
+      
+        else if(getUser.etat==true){
+          return res.status(401).json({
+            message: 'le compte n\'existe pas',
+          })  
+        }
+      
       let jwtToken = jwt.sign(
         {
           email: getUser.email,
@@ -131,6 +138,7 @@ router.post('/signin', (req, res, next) => {
         _id: getUser._id,
       })
     })
+    
     .catch((err) => {
       return res.status(401).json({
         message: 'Authentication failed',

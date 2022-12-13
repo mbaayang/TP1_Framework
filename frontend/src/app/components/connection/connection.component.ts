@@ -49,6 +49,7 @@ errMsg:any;
         this.authService.currentUser = res;
         this.router.navigate(['user-profile/' + res.msg._id]);
       });
+      
     },
     error =>{
       this.errMsg= error.error.message

@@ -60,6 +60,12 @@ export class InscriptionComponent implements OnInit {
 
 
   registerUser() {
+
+    this.submitted = true;
+    if(this.signupForm.invalid){
+      return;
+    }
+
     let pass1 = (<HTMLInputElement>document.getElementById("pass1")).value;
     let pass2 = (<HTMLInputElement>document.getElementById("pass2")).value;
     //générer matricule pour administrateur et utilisateur
@@ -85,10 +91,7 @@ export class InscriptionComponent implements OnInit {
             window.location.reload();
         }
     });
-    this.submitted = true;
-    if(this.signupForm.invalid){
-      return;
-    }
+  
 
    
 
