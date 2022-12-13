@@ -1,10 +1,13 @@
 <div class="container w-50 my-5 bg-light">
     <form [formGroup]="signupForm" (ngSubmit)="registerUser()" id="leform" class="row g-3 my-5"
         enctype="multipart/form-data">
-        <h2 class="text-center">S'inscrire</h2>
-        <div *ngIf="errMsg == true" class="alert alert-danger" role="alert">
+<!--         <div *ngIf="errMsg == true" class="alert alert-danger" role="alert">
             <strong>Erreur</strong> Email déjà existant !
-        </div>
+        </div> -->
+        <ng-container *ngIf="this.errMsg">
+            <div class="alert alert-danger" role="alert">{{errMsg}}</div>
+          </ng-container>
+        <h2 class="text-center">S'inscrire</h2>
         <div class=" col-md-6">
             <label for="nom">Nom</label>
             <input [ngClass]="{'is-invalid':submitted && signupForm.controls['nom'].errors}" formControlName="nom"

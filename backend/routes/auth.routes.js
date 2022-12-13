@@ -110,6 +110,10 @@ router.post('/signin', (req, res, next) => {
         return res.status(401).json({
           message: 'Le mot de passe est incorrect !',
         })
+      }else if(getUser.etat == true){
+        return res.status(401).json({
+          message: 'Le compte est désactivé !' ,
+        })
       }
       let jwtToken = jwt.sign(
         {
