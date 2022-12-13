@@ -112,7 +112,7 @@ router.post('/signin', (req, res, next) => {
         })
       }else if(getUser.etat == true){
         return res.status(401).json({
-          message: 'Le compte est désactivé !',
+          message: 'Le compte est désactivé !' ,
         })
       }
       let jwtToken = jwt.sign(
