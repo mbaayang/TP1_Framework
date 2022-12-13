@@ -28,13 +28,7 @@ export class ConnectionComponent implements OnInit {
   ngOnInit() {
     this.imageUrl='../assets/default-avatar.jpg';
   }
-/*   onSubmit() {
-    this.submitted = true
 
-    if(this.signinForm.invalid){
-      return
-    }
-  } */
   loginUser() {
     this.submitted = true;
 
