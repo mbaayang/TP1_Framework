@@ -45,8 +45,8 @@ var upload = multer({
 router.post(
   '/register-user', upload.single('imageUrl'),
   [
-    check('nom').not().isEmpty(),
     check('prenom').not().isEmpty(),
+    check('nom').not().isEmpty(),
     check('email', 'Email is required').not().isEmpty(),
     check('password', 'Password should be between 8 to 16 characters long')
       .not()
@@ -97,7 +97,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'L\'email est incorrect',
         })
       }
       getUser = user
@@ -106,7 +106,7 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Authentification échouée',
+          message: 'Le mot de passe est incorrect',
         })
       }
       let jwtToken = jwt.sign(
@@ -183,6 +183,54 @@ router.route('/update-user/:id').put((req, res, next) => {
       }
     },
   )
+})
+
+// change password
+router.post('/password', (req, res, next) => {
+  let getUser
+  userSchema
+    .findOne({
+      email: req.body.email,
+    })
+    .then((user) => {
+      getUser = user
+      return bcrypt.compare(req.body.password, user.password)
+    })
+    .then((response) => {
+      if (!response) {
+        return res.status(401).json({
+          message: 'Authentification échouée',
+        })
+      }
+      
+        const errors = validationResult(req)
+        console.log(req.body)
+    
+          bcrypt.hash(req.body.password, 10).then((hash) => {
+            const user = new userSchema({
+              password: hash,
+            })
+            user
+              .save()
+              .then((response) => {
+                res.status(201).json({
+                  message: 'Modification réussie !',
+                  result: response,
+                })
+              })
+              .catch((error) => {
+                res.status(500).json({
+                  error: error,
+                })
+              })
+          })
+      
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      })
+    })
 })
 
 // Delete User

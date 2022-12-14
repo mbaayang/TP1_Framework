@@ -87,14 +87,14 @@ export class InscriptionComponent implements OnInit {
             console.log('User successfully created!', event.body);
             this.percentDone = false;
             /* this.router.navigate([]); */
-            Swal.fire('Inscription réussie !'),
+            Swal.fire('Inscription réussie !')
             window.location.reload();
         }
 
     });
     this.submitted = true;
     this.signupForm.reset();
-    Swal.fire('Inscription réussie !');
+    /* Swal.fire('Inscription réussie !'); */
     if(this.signupForm.invalid){
       return;
     }
@@ -109,7 +109,6 @@ export class InscriptionComponent implements OnInit {
       setTimeout(()=>{ this.verifPass = true}, 5000);
     }
   }
-
 
 
   }
