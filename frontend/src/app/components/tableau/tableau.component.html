@@ -1,5 +1,5 @@
 <div class="my-5">
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-3">
     <div class="input-group">
     <span class="input-group-text" id="inputGroupPrepend2"><i class="bi bi-search"></i></span>
     <input
@@ -9,25 +9,26 @@
       [(ngModel)]="filterTerm"/>
     </div>
   </div>
-  <table class="table table-hover w-75 my-5">
+  <table class="table table-hover w-75 my-3">
     <thead>
         <tr class="line">
-            <th class="col-lg-2">Prenom</th>
-            <th class="col-lg-2">Nom</th>
-            <th class="col-lg-2">Email</th>
-            <th class="col-lg-2">Rôle</th>
-            <th *ngIf="this.currentUser.role === 'Administrateur'" class="col-lg-2">Actions</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rôle</th>
+            <th *ngIf="this.currentUser.role === 'Utilisateur'" scope="col">Date inscription</th>
+            <th *ngIf="this.currentUser.role === 'Administrateur'" scope="col">Actions</th>
         </tr>
     </thead>
 
-    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:7, currentPage:page, totalItems:totalLenght}">
+    <tbody *ngFor="let donnee of Users | filter: filterTerm | paginate: {itemsPerPage:6, currentPage:page, totalItems:totalLenght}">
       <tr *ngIf="donnee._id !== this.currentUser._id">
             <td>{{ donnee.prenom }}</td>
             <td>{{ donnee.nom }}</td>
             <td>{{ donnee.email }}</td>
             <td>{{ donnee.role }}</td>
             <td *ngIf="this.currentUser.role === 'Administrateur'">
-              <button class="btn link" (click)="changeArchive(donnee._id, donnee.etat)">
+              <button class="btn link" (click)="archiver(donnee._id, donnee.etat)">
                 <i class="bi bi-arrow-down-square"></i>
               </button>
               <button class="btn link" data-toggle="modal" data-target="#modifier" (click)="getUserData(donnee._id,donnee.prenom,donnee.nom,donnee.email)">
@@ -37,6 +38,7 @@
                 <i class="bi bi-arrow-left-right" ></i>
               </button>
             </td>
+            <td *ngIf="this.currentUser.role === 'Utilisateur'">{{ donnee.createdAt | date:'d MMMM yyyy à HH:mm'}} </td>
         </tr>
     </tbody>
   </table>
@@ -53,12 +55,27 @@
                       <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
                           <label for='prenom'>Prenom</label>
                           <input type="text" formControlName="prenom" class="form-control">
+                          <div *ngIf="submitted && updateForm.controls['prenom'].errors" class="text-danger">
+                            <div *ngIf="submitted && updateForm.controls['prenom'].errors['required']">
+                                Veillez renseignez le prenom
+                            </div>
+                          </div>
                           <br />
                           <label for='nom'>Nom</label>
                           <input type="text" formControlName="nom" class="form-control">
+                          <div *ngIf="submitted && updateForm.controls['nom'].errors" class="text-danger">
+                            <div *ngIf="submitted && updateForm.controls['nom'].errors['required']">
+                                Veillez renseignez le nom
+                            </div>
+                          </div>
                           <br />
                           <label for='email'>Adresse email</label>
                           <input type="email" formControlName="email" class="form-control">
+                          <div *ngIf="submitted && updateForm.controls['email'].errors" class="text-danger">
+                            <div *ngIf="submitted && updateForm.controls['email'].errors['required']">
+                                Veillez renseignez le mail
+                            </div>
+                          </div>
                           <br />
                           <button type="submit" class="btn btn-success">Sauvegarder</button>
                       </form>
@@ -74,6 +91,4 @@
   <div class="pagination fixed-bottom justify-content-center">
     <pagination-controls (pageChange)="page=$event"></pagination-controls>
   </div>
-
-
 

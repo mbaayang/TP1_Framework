@@ -66,12 +66,10 @@ deleteUser(id: any): Observable<any> {
     });
   }
 
-
   // Sign-in
   signIn(user: User) {
     return this.http
       .post<any>(`${this.endpoint}/signin`, user)
-      
   }
   getToken() {
     return localStorage.getItem('access_token');

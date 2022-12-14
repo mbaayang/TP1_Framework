@@ -3,14 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConnectionComponent } from './components/connection/connection.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { PageAdminComponent } from './components/page-admin/page-admin.component';
-import { PageUserComponent } from './components/page-user/page-user.component';
 import { AuthGuard } from "./service/auth.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: '/log-in', pathMatch: 'full' },
   { path: 'log-in', component: ConnectionComponent },
   { path: 'sign-up', component: InscriptionComponent },
-  { path: 'archive', component: PageUserComponent},
   { path: 'user-profile/:id', component: PageAdminComponent, canActivate: [AuthGuard] }
 ];
 

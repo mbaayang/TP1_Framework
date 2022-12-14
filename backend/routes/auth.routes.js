@@ -9,7 +9,7 @@ mongoose = require('mongoose')
 multer = require('multer')
 
 // Multer File upload settings
-const DIR = './public/'
+const DIR = './images/'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -45,8 +45,8 @@ var upload = multer({
 router.post(
   '/register-user', upload.single('imageUrl'),
   [
-    check('prenom').not().isEmpty(),
     check('nom').not().isEmpty(),
+    check('prenom').not().isEmpty(),
     check('email', 'Email is required').not().isEmpty(),
     check('password', 'Password should be between 8 to 16 characters long')
       .not()
@@ -58,6 +58,7 @@ router.post(
     console.log(req.body)
 
       bcrypt.hash(req.body.password, 10).then((hash) => {
+
         const url = req.protocol + '://' + req.get('host')
         const user = new userSchema({
           prenom: req.body.prenom,
@@ -66,20 +67,21 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: url + '/public/' + req.file.filename,
+          imageUrl: url + '/images/' + req.file.filename,
           matricule: req.body.matricule,
         })
         user
           .save()
           .then((response) => {
+            console.log(response);
             res.status(201).json({
               message: 'Inscription réussie !',
               result: response,
             })
           })
           .catch((error) => {
-            res.status(500).json({
-              error: error,
+            res.status(409).json({
+              error: error.message.split("email:")[1],
             })
           })
       })
@@ -97,7 +99,7 @@ router.post('/signin', (req, res, next) => {
     .then((user) => {
       if (!user) {
         return res.status(401).json({
-          message: 'L\'email est incorrect',
+          message: 'Compte non existant !',
         })
       }
       getUser = user
@@ -106,7 +108,11 @@ router.post('/signin', (req, res, next) => {
     .then((response) => {
       if (!response) {
         return res.status(401).json({
-          message: 'Le mot de passe est incorrect',
+          message: 'Le mot de passe est incorrect !',
+        })
+      }else if(getUser.etat == true){
+        return res.status(401).json({
+          message: 'Le compte est désactivé !' ,
         })
       }
       let jwtToken = jwt.sign(
@@ -127,7 +133,7 @@ router.post('/signin', (req, res, next) => {
     })
     .catch((err) => {
       return res.status(401).json({
-        message: 'Authentification échouée',
+        message: 'Authentication failed',
       })
     })
 })
@@ -143,8 +149,9 @@ router.route('/').get((req, res, next) => {
   })
 })
 
+
 // Get User
-/* router.route('/read-user/:id').get((req, res) => {
+router.route('/read-user/:id').get((req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -152,7 +159,10 @@ router.route('/').get((req, res, next) => {
       res.json(data);
     }
   });
-}); */
+});
+
+
+
 
 // Get Single User
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
@@ -183,54 +193,6 @@ router.route('/update-user/:id').put((req, res, next) => {
       }
     },
   )
-})
-
-// change password
-router.post('/password', (req, res, next) => {
-  let getUser
-  userSchema
-    .findOne({
-      email: req.body.email,
-    })
-    .then((user) => {
-      getUser = user
-      return bcrypt.compare(req.body.password, user.password)
-    })
-    .then((response) => {
-      if (!response) {
-        return res.status(401).json({
-          message: 'Authentification échouée',
-        })
-      }
-      
-        const errors = validationResult(req)
-        console.log(req.body)
-    
-          bcrypt.hash(req.body.password, 10).then((hash) => {
-            const user = new userSchema({
-              password: hash,
-            })
-            user
-              .save()
-              .then((response) => {
-                res.status(201).json({
-                  message: 'Modification réussie !',
-                  result: response,
-                })
-              })
-              .catch((error) => {
-                res.status(500).json({
-                  error: error,
-                })
-              })
-          })
-      
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
-      })
-    })
 })
 
 // Delete User

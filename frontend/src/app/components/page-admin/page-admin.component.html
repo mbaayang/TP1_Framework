@@ -12,15 +12,29 @@
           </div>
       </div>
       <div class="end">
-        <a class="m-1" (click)="afficher1()"><i style="font-size: 25px;" class="bi bi-person-plus"></i> Actifs</a>
-          <a *ngIf="this.currentUser.role === 'Administrateur'" class="m-1" (click)="afficher()"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archivés</a>
-          <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-              <i style="font-size: 25px;" class="bi bi-gear-fill"></i>
-          </button>
+        <a class="m-1" (click)="afficher1()"><i style="font-size: 25px;" class="bi bi-person-check"></i> Actifs</a>
+        <a *ngIf="this.currentUser.role === 'Administrateur'" class="m-1" (click)="afficher()"><i style="font-size: 25px;" class="bi bi-person-x"></i> Archivés</a>
+        <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <i style="font-size: 25px;" class="bi bi-gear-fill"></i>
+        </button>
       </div>
   </div>
 </header>
 
+<div>
+  <form *ngIf="formPassword == true" class="changPass my-5">
+    <button (click)="hidePassword()" type="button" class="btn-close" aria-label="Close"></button>
+    <div class="mb-3">
+      <label for="currentPassword" class="form-label">Ancien mot de passe</label>
+      <input type="password" class="form-control" name="currentPassword" required>
+    </div>
+    <div class="mb-3">
+      <label for="newPassword" class="form-label">Nouveau mot de passe</label>
+      <input type="password" class="form-control" name="newPassword" required>
+    </div>
+    <button type="submit" class="btn btn-success">Sauvegarder</button>
+  </form>
+</div>
 
 <div>
   <form *ngIf="formImage == true" class="changPass my-5">
@@ -46,45 +60,13 @@
   </div>
   <div class="offcanvas-body">
     <div (click)="showPassword()" class="setting m-4" data-bs-dismiss="offcanvas">
-        <a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="bi bi-sliders2"></i> Changer mon mot de passe </a>
+        <a><i class="bi bi-sliders2"></i> Changer mon mot de passe </a>
     </div>
     <div (click)="showImage()" class="setting m-4" data-bs-dismiss="offcanvas">
         <a><i class="bi bi-person-gear"></i> Changer la photo de profil </a>
     </div>
     <div class="setting m-4">
         <a (click)="logout()" *ngIf="this.authService.isLoggedIn" href=""><i class="bi bi-box-arrow-right"></i> Deconnexion </a>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Changer mot de passe</h1>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Ancien mot de passe</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Nouveau mot de passe</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Confirmation</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-        <button type="button" class="btn btn-primary">Sauvegarder</button>
-      </div>
     </div>
   </div>
 </div>

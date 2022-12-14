@@ -13,8 +13,9 @@ let userSchema = new Schema({
     matricule: { type: String, required:true }
 }, {timestamps: true},
 {
-    collection: 'user'
+    collection: 'personnes'
 })
 
-userSchema.plugin(uniqueValidator, { message: 'Email existe déjà' });
-module.exports = mongoose.model('user', userSchema)
+userSchema.plugin(uniqueValidator, { message: 'Compte déjà existant !' });
+
+module.exports = mongoose.model('personnes', userSchema)

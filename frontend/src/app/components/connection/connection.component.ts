@@ -13,7 +13,8 @@ export class ConnectionComponent implements OnInit {
   registerForm: FormGroup;
   submitted=false;
   imageUrl!:string;
-errMsg:any;
+  errMsg: any;
+
   constructor(
     public formBuilder: FormBuilder,
     public authService: AuthService,
@@ -27,37 +28,25 @@ errMsg:any;
   ngOnInit() {
     this.imageUrl='../assets/default-avatar.jpg';
   }
-/*   onSubmit() {
-    this.submitted = true
 
-    if(this.signinForm.invalid){
-      return
-    }
-  } */
   loginUser() {
-
-
     this.submitted = true;
 
     if(this.registerForm.invalid){
       return;
   }
-
     this.authService.signIn(this.registerForm.value).subscribe((res: any) => {
       localStorage.setItem('access_token', res.token);
       this.authService.getUserProfile(res._id).subscribe((res) => {
         this.authService.currentUser = res;
-        if(res.etat == true){
-          this.router.navigate(['archive']);
-        }
         this.router.navigate(['user-profile/' + res.msg._id]);
       });
     },
-    error =>{
-      this.errMsg= error.error.message
-      console.log(error.error.message);
+    error => {
+      this.errMsg = error.error.message
+      console.log(error.error.message)
     }
-
     );
+
   }
 }
