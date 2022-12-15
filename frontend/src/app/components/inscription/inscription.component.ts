@@ -48,7 +48,7 @@ export class InscriptionComponent implements OnInit {
 
     const file = event.target.files[0];
     this.signupForm.patchValue({
-      imageUrl: file | <any>null,
+      imageUrl: file,
     });
     this.signupForm.get('imageUrl')?.updateValueAndValidity();
 
@@ -86,7 +86,7 @@ export class InscriptionComponent implements OnInit {
             console.log('User successfully created!', event.body);
             this.percentDone = false;
             Swal.fire('Inscription réussie !'),
-            window.location.reload();
+            window.setTimeout(function(){location.reload()},1500)
              break;
         }
     } , // Intercepter les messages d'erreurs du serveur

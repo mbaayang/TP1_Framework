@@ -111,10 +111,11 @@ export class TableauComponent implements OnInit {
     this.authService.updateUser(id, user).subscribe(
       data=>{
         this.ngOnInit();
-        Swal.fire('Modification réussie !');
-        setTimeout(()=>{Swal.fire('Modification réussie !')}, 5000);
-        window.location.reload();
+        Swal.fire('Modification',
+                  'Réussie !',
+                  'success');
+        //window.location.reload();
+        window.setTimeout(function(){location.reload()},1500)
       });
   }
-
   }

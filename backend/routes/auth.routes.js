@@ -67,7 +67,7 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: url + '/images/' + req.file?.filename | null,
+          imageUrl: url + '/images/' + req.file?.filename,
           matricule: req.body.matricule,
         })
         user
