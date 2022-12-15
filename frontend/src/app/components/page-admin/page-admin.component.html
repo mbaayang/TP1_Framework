@@ -1,3 +1,4 @@
+<!-- ---------------------------Header----------------------------- -->
 <header class="header">
   <div class="menu_admin">
       <div class="infos">
@@ -20,10 +21,12 @@
       </div>
   </div>
 </header>
+<!-- ----------------------------Header-------------------------- -->
 
+<!-- --------------------------Changer le mot de passe------------------- -->
 <div>
   <form *ngIf="formPassword == true" class="changPass my-5">
-    <button (click)="hidePassword()" type="button" class="btn-close" aria-label="Close"></button>
+    <button (click)="hidePassword()" type="button" class="btn-close fermer" aria-label="Close"></button>
     <div class="mb-3">
       <label for="currentPassword" class="form-label">Ancien mot de passe</label>
       <input type="password" class="form-control" name="currentPassword" required>
@@ -35,10 +38,13 @@
     <button type="submit" class="btn btn-success">Sauvegarder</button>
   </form>
 </div>
+<!-- --------------------------Changer le mot de passe------------------- -->
 
+
+<!-- --------------------------Changer la photo de profil------------------- -->
 <div>
   <form *ngIf="formImage == true" class="changPass my-5">
-    <button (click)="hideImage()" type="button" class="btn-close" aria-label="Close"></button>
+    <button (click)="hideImage()" type="button" class="btn-close fermer" aria-label="Close"></button>
     <div class="mb-3">
       <label for="newImageUrl" class="form-label">Choisisez une image</label>
       <input type="file" class="form-control" name="newImageUrl" required>
@@ -46,13 +52,14 @@
     <button type="submit" class="btn btn-success">Confirmer</button>
   </form>
 </div>
+<!-- --------------------------Changer la photo de profil------------------- -->
 
 <app-tableau *ngIf="!show"></app-tableau>
 <app-table-archive *ngIf="show"></app-table-archive>
 <app-modifier></app-modifier>
 
 
-
+<!-- --------------------------Paramètrage------------------- -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasRightLabel">Paramétres</h5>

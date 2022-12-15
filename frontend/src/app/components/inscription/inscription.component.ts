@@ -25,6 +25,7 @@ export class InscriptionComponent implements OnInit {
               public authService: AuthService,
               public router: Router
   ) {
+    //Crontôle de saisie du formulaire
     this.signupForm = this.formBuilder.group({
         prenom:['',[Validators.required , UsernameValidator.cannotContainSpace]],
         nom:['',[Validators.required , UsernameValidator.cannotContainSpace]],
@@ -33,7 +34,7 @@ export class InscriptionComponent implements OnInit {
         password:['',[Validators.required,Validators.minLength(8)]],
         passwordConfirm: ['', Validators.required],
         etat:[0, Validators.required],
-        imageUrl:[null],
+        imageUrl:[""],
         matricule: ['']
     },  { validator: MustMatch('password', 'passwordConfirm')}
   )}
@@ -42,16 +43,15 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {}
 
-  // Image Preview
+  // Fonction pour télécharger l'mage 
   uploadFile(event: any) {
 
     const file = event.target.files[0];
     this.signupForm.patchValue({
-      imageUrl: file,
+      imageUrl: file | <any>null,
     });
     this.signupForm.get('imageUrl')?.updateValueAndValidity();
 
-    // File Preview
     const reader = new FileReader();
     reader.onload = () => {
       this.preview = reader.result as string;
@@ -59,7 +59,7 @@ export class InscriptionComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-
+//Fonction pour l'inscription
   registerUser() {
     this.submitted = true;
     if(this.signupForm.invalid){
@@ -89,7 +89,7 @@ export class InscriptionComponent implements OnInit {
             window.location.reload();
              break;
         }
-    } ,
+    } , // Intercepter les messages d'erreurs du serveur
     error => {
       this.errMsg = error.error.error
       console.log(this.errMsg)

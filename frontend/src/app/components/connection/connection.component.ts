@@ -29,6 +29,7 @@ export class ConnectionComponent implements OnInit {
     this.imageUrl='../assets/default-avatar.jpg';
   }
 
+  // Fonction pour la connexion
   loginUser() {
     this.submitted = true;
 
@@ -41,7 +42,7 @@ export class ConnectionComponent implements OnInit {
         this.authService.currentUser = res;
         this.router.navigate(['user-profile/' + res.msg._id]);
       });
-    },
+    }, // Intercepter les messages d'erreurs du serveur
     error => {
       this.errMsg = error.error.message
       console.log(error.error.message)

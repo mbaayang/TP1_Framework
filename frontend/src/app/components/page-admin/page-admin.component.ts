@@ -20,16 +20,17 @@ export class PageAdminComponent {
     private actRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
   ) {
+     // Recuperer les informations de l'utilisateur
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.authService.getUserProfile(id).subscribe((res) => {
       this.currentUser = res.msg;
     });
   }
-
+  //Deconnexion
   logout() {
     this.authService.doLogout()
   }
-
+  // Fonctions pour basculer entre le tableau des actifs et celui des archives
   public afficher():void{
     this.show = true
   }

@@ -36,6 +36,7 @@ export class ModifierComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Fonction pour modifier un utlisateur
   onUpdate(): any {
     this.authService.updateUser(this.getId, this.updateForm.value)
     .subscribe(() => {

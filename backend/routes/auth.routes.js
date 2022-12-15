@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator')
 mongoose = require('mongoose')
 multer = require('multer')
 
-// Multer File upload settings
+// Téléchargement de la photo avec multer
 const DIR = './images/'
 
 const storage = multer.diskStorage({
@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
   },
 })
 
-// Multer Mime Type Validation
+// Validation avec Multer Mime Type 
 var upload = multer({
   storage: storage,
   limits: {
@@ -41,7 +41,7 @@ var upload = multer({
   },
 })
 
-// Sign-up
+// Inscription
 router.post(
   '/register-user', upload.single('imageUrl'),
   [
@@ -67,7 +67,7 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: url + '/images/' + req.file.filename,
+          imageUrl: url + '/images/' + req.file?.filename | null,
           matricule: req.body.matricule,
         })
         user
@@ -89,13 +89,14 @@ router.post(
 )
 
 
-// Sign-in
+// Connexion
 router.post('/signin', (req, res, next) => {
   let getUser
   userSchema
     .findOne({
       email: req.body.email,
     })
+    // Verifier si l'utilisateur existe
     .then((user) => {
       if (!user) {
         return res.status(401).json({
@@ -138,7 +139,7 @@ router.post('/signin', (req, res, next) => {
     })
 })
 
-// Get Users
+// Recuperez tous les utilisateurs
 router.route('/').get((req, res, next) => {
   userSchema.find((error, response)=> {
     if (error) {
@@ -149,8 +150,7 @@ router.route('/').get((req, res, next) => {
   })
 })
 
-
-// Get User
+// Recuperez un utilisateur
 router.route('/read-user/:id').get((req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
@@ -161,10 +161,7 @@ router.route('/read-user/:id').get((req, res) => {
   });
 });
 
-
-
-
-// Get Single User
+// Recuperez et autoriser la connexion d'un utilisateur
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {

@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
     public authService: AuthService,
     private actRoute: ActivatedRoute
   ) {
+    // Recuperer les informations de l'utilisateur
     let id = this.actRoute.snapshot.paramMap.get('id');
     this.authService.getUserProfile(id).subscribe((res) => {
       this.currentUser = res.msg;
