@@ -66,12 +66,12 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div (click)="showPassword()" class="setting m-4" data-bs-dismiss="offcanvas">
+    <!-- <div (click)="showPassword()" class="setting m-4" data-bs-dismiss="offcanvas">
         <a><i class="bi bi-sliders2"></i> Changer mon mot de passe </a>
     </div>
     <div (click)="showImage()" class="setting m-4" data-bs-dismiss="offcanvas">
         <a><i class="bi bi-person-gear"></i> Changer la photo de profil </a>
-    </div>
+    </div> -->
     <div class="setting m-4">
         <a (click)="logout()" *ngIf="this.authService.isLoggedIn" href=""><i class="bi bi-box-arrow-right"></i> Deconnexion </a>
     </div>
