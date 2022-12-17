@@ -1,0 +1,404 @@
+[{
+  "_id": {
+    "$oid": "639233fb0c3ca49aa21c997e"
+  },
+  "prenom": "Sala",
+  "nom": "SY",
+  "email": "saly@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$IMSNF5IwZ/jR9RxWGQWvf.rgX6Sb/pVpRnDQ/na4EtAomXBOsmDcm",
+  "etat": true,
+  "matricule": "MUT7101",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670525948041"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670848874003"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63937e9ae85ea74641f9946a"
+  },
+  "prenom": "Khadija",
+  "nom": "Diallo",
+  "email": "diallokhadija@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$0vabRCk7vZgnT9Sn2bHciuvXZUkXTOifFhm1/5TQgW9H78zYiGdhy",
+  "etat": false,
+  "matricule": "MAT1cba",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670610586173"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671117173127"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63937f82e85ea74641f9946e"
+  },
+  "prenom": "Oumy",
+  "nom": "Toure",
+  "email": "toureoumy@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$MnE4eBW3Oxc2NsWoZoCiRefbBeSJIDQ0Hji6nevez/6NAgYER/40m",
+  "etat": false,
+  "matricule": "MUT7ce4",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670610818728"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670855177247"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6393bbfee85ea74641f996c9"
+  },
+  "prenom": "Fatou",
+  "nom": "Gueye",
+  "email": "gueyefatou@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$Nc0csZIk8S3XyrhVghsCw.crY9u7sIRJjU5f1TNjVuc0fgDs23UOe",
+  "etat": false,
+  "matricule": "MAT235c",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670626302803"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670855197180"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394dd90a98f6e94c06d6d7f"
+  },
+  "prenom": "Cheikh",
+  "nom": "Gueye",
+  "email": "gueyecheikh@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$d9gcaD5LtsA8ZEyqQh7B3unsR42N2w8zNbwWou4SldAogueD.H8ji",
+  "etat": true,
+  "matricule": "MUTbf87",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670700434096"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670933709363"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394dfb4a98f6e94c06d6d83"
+  },
+  "prenom": "Marie",
+  "nom": "Sow",
+  "email": "sowmarie@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$ARUnYf0K14unUfComwU4V.UF9MxymmaYtjkekRqyo0dhbeZ1qvtwy",
+  "etat": false,
+  "matricule": "MAT47ad",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670700980186"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670700980186"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394e334a98f6e94c06d6d8b"
+  },
+  "prenom": "Maman",
+  "nom": "Gueye",
+  "email": "gueyemaman@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$cM5U9PBf9rEbcKPSv/rDcu3YdjOW/09TT8/VQnd9rWZ6ec9dohu3K",
+  "etat": false,
+  "matricule": "MUT8561",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670701876549"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670701876549"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394e38aa98f6e94c06d6d8f"
+  },
+  "prenom": "Maty",
+  "nom": "Thiam",
+  "email": "thiammaty@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$9qN6GsOpCYLR5sRRTEvVk.OE2lpbGRqFaJpzHXeMd4wRxbCAzM3q6",
+  "etat": true,
+  "matricule": "MUT072d",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670701962243"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670848887968"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394e40da98f6e94c06d6d93"
+  },
+  "prenom": "Adama",
+  "nom": "Dieye",
+  "email": "dieyeadama@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$l8HU1pj/VgmXzn.YeYIC4eU/kvXN4r6DovgOpICYglQPKfZyZsORi",
+  "etat": true,
+  "matricule": "MUT1200",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670702093644"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670848920655"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394e525a98f6e94c06d6d97"
+  },
+  "prenom": "Fatima",
+  "nom": "Ndiaye",
+  "email": "ndiayefatim@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$9T9FrAYR.LxkDc.leuCs1.2FUoTUNY07oQQ2FUrTsguMHluLYlvKi",
+  "etat": false,
+  "matricule": "MAT775d",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670702374015"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670933774624"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6394ffef43587f250de4f7da"
+  },
+  "prenom": "Bara",
+  "nom": "Ba",
+  "email": "bmb@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$u94gmZuKG6OSG0.q9Z0SouuHYyEmeFICJ1CBKb2NOUlux..4Fa0Fq",
+  "etat": true,
+  "matricule": "MAT0d62",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670709232463"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670848603927"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63951947759a9a14d02aaf27"
+  },
+  "prenom": "Mame Astou",
+  "nom": "Fall",
+  "email": "fallastou@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$nZkagCHRrf.kfs2w/gsCLudVlM9AtdA368.8h9sI7MOC0cW7tePrq",
+  "etat": false,
+  "matricule": "MUT04d0",
+  "imageUrl": "http://localhost:4000/images/undefined",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670715722920"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670853799552"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6395d0079eee401abb5b37d7"
+  },
+  "prenom": "Amina",
+  "nom": "Diop",
+  "email": "diopamina@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$xa1qL9kTuTsGC/.9FIUCGONB5y80imAKh0QD7qLS/ZW/wpSyatHHe",
+  "etat": false,
+  "matricule": "MUTcffa",
+  "imageUrl": "http://localhost:4000/images/undefined",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670762503580"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671009416584"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6396fcc5f99e7a87e7c97658"
+  },
+  "prenom": "mamy",
+  "nom": "Mamy",
+  "email": "mamy@gmail.com",
+  "role": "Administrateur",
+  "password": "$2b$10$7QrVP.c6sQ80p8UYXXyEU.BQFfotH6.KqkemA0ZlqPzfATm4Gup9C",
+  "etat": false,
+  "imageUrl": "http://localhost:4000/images/img1.jpg",
+  "matricule": "MAT655d",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670839493735"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670839493735"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639707ca5a5f92b6b67c8147"
+  },
+  "prenom": "Papa",
+  "nom": "Gueye",
+  "email": "papa@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$FYLauzogjS4fPYeaBVJ/3ebmYTArTsGkI5DuOwVWjkqououcs6P2C",
+  "etat": false,
+  "imageUrl": "http://localhost:4000/images/default-avatar.jpg",
+  "matricule": "MUT08fe",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670842314680"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670853248501"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63971f82ef8d209cbd37d404"
+  },
+  "prenom": "Cheikh",
+  "nom": "Sall",
+  "email": "sallcheikh@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$XeTUFqi3w2.vlciO7kMaiebSOWHqBx45RCtvg1FEDvB/C.G1puvom",
+  "etat": true,
+  "imageUrl": "http://localhost:4000/images/img2.jpg",
+  "matricule": "MUT3692",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670848387377"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670848903609"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63984f7e43012d109e80e65b"
+  },
+  "prenom": "Awa",
+  "nom": "Soumbane",
+  "email": "awa@gmail.com",
+  "role": "Utilisateur",
+  "password": "$2b$10$L9oz5OfjGZZUyemhXWtDDOVtLRM6JonIOIu0c2i91/dqFt3wcB0H2",
+  "etat": true,
+  "imageUrl": "http://localhost:4000/images/default-avatar.jpg",
+  "matricule": "MUT7fe0",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670926207339"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670973863792"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639b3995246a380e7990b6b1"
+  },
+  "prenom": "a",
+  "nom": "a",
+  "email": "a@a",
+  "role": "Administrateur",
+  "password": "$2b$10$Ogfo3TwbxGC3w3HKHupoHugqkB7EfDO4PHNzpFpK3rd2JHltN.RL.",
+  "etat": false,
+  "imageUrl": "http://localhost:4000/images/undefined",
+  "matricule": "MAT1db1",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1671117205669"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1671117205669"
+    }
+  },
+  "__v": 0
+}]

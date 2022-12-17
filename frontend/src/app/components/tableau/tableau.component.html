@@ -54,6 +54,9 @@
       <div class="modal-header">
         <h5 class="modal-title">Modifier</h5>
       </div>
+      <div *ngIf="!errMsg" class="alert alert-danger" role="alert">
+        <strong> Erreur </strong> Email déjà existant !
+      </div>
       <div class="modal-body">
         <form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
           <label for='prenom'>Prenom</label>
@@ -61,6 +64,9 @@
           <div *ngIf="submitted && updateForm.controls['prenom'].errors" class="text-danger">
             <div *ngIf="submitted && updateForm.controls['prenom'].errors['required']">
               Veillez renseignez le prenom
+            </div>
+            <div *ngIf="submitted && updateForm.controls['prenom'].errors['cannotContainSpace']">
+              Espace non autorisé
             </div>
           </div>
           <br />
@@ -70,6 +76,9 @@
             <div *ngIf="submitted && updateForm.controls['nom'].errors['required']">
               Veillez renseignez le nom
             </div>
+            <div *ngIf="submitted && updateForm.controls['nom'].errors['cannotContainSpace']">
+              Espace non autorisé
+            </div>
           </div>
           <br />
           <label for='email'>Adresse email</label>
@@ -78,6 +87,9 @@
             <div *ngIf="submitted && updateForm.controls['email'].errors['required']">
               Veillez renseignez le mail
             </div>
+            <div *ngIf="submitted && updateForm.controls['email'].errors['email']">
+              Le mail n'est pas valide!'
+          </div>
           </div>
           <br />
           <button type="submit" class="btn btn-success">Sauvegarder</button>

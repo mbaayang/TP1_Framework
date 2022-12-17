@@ -19,7 +19,7 @@ export class InscriptionComponent implements OnInit {
   verifPass:any = true;
   preview!: string;
   percentDone?: any = 0;
-  errMsg:Boolean = false
+  errMsg: any;
 
   constructor(public formBuilder: FormBuilder,
               public authService: AuthService,
@@ -85,8 +85,13 @@ export class InscriptionComponent implements OnInit {
           case HttpEventType.Response:
             console.log('User successfully created!', event.body);
             this.percentDone = false;
-            Swal.fire('Inscription réussie !'),
-            window.setTimeout(function(){location.reload()},1500)
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Inscription réussi !',
+              showConfirmButton: false,
+              timer: 1500
+            });window.setTimeout(function(){location.reload()},1000)
              break;
         }
     } , // Intercepter les messages d'erreurs du serveur

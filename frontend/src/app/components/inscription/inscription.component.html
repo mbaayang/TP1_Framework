@@ -4,7 +4,7 @@
         <h2 class="text-center">Inscription</h2>
         <ng-container *ngIf="this.errMsg">
             <div class="alert alert-danger" role="alert"><strong> Erreur </strong> {{errMsg}}</div>
-          </ng-container>
+        </ng-container>
         <div class=" col-md-6">
             <label for="nom">Nom</label>
             <input [ngClass]="{'is-invalid':submitted && signupForm.controls['nom'].errors}" formControlName="nom"

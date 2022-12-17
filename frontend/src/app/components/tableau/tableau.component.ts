@@ -13,15 +13,14 @@ import Swal from 'sweetalert2';
 })
 export class TableauComponent implements OnInit {
   currentUser: any = {};
-
   filterTerm!: string;
-
   Users:any = [];
   user:any;
   totalLenght: any;
   page : number=1;
   updateForm: FormGroup;
   submitted=false;
+  errMsg:any = true;
 
 
   constructor(public authService: AuthService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone,public formBuilder: FormBuilder) {
@@ -30,15 +29,13 @@ export class TableauComponent implements OnInit {
       this.currentUser = res.msg;
     });
 
-    
-
     this.updateForm = this.formBuilder.group({
       prenom: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
       nom: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
-      email: ['', [Validators.required, UsernameValidator.cannotContainSpace]]
+      email: ['', [Validators.required, Validators.email]]
     })
+  }
 
-     }
   ngOnInit(): void {
 
     this.authService.GetUsers().subscribe(
@@ -90,9 +87,9 @@ export class TableauComponent implements OnInit {
 
     this.updateForm = this.formBuilder.group({
         id:[id],
-        prenom: [prenom, [Validators.required]],
-        nom: [nom, [Validators.required]],
-        email: [email, [Validators.required]],
+        prenom: [prenom, [Validators.required, UsernameValidator.cannotContainSpace]],
+        nom: [nom, [Validators.required, UsernameValidator.cannotContainSpace]],
+        email: [email, [Validators.required, Validators.email]],
       });
     console.log(id)
   }
@@ -111,11 +108,17 @@ export class TableauComponent implements OnInit {
     this.authService.updateUser(id, user).subscribe(
       data=>{
         this.ngOnInit();
-        Swal.fire('Modification',
-                  'Réussie !',
-                  'success');
-        //window.location.reload();
-        window.setTimeout(function(){location.reload()},1500)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Modification réussi !',
+          showConfirmButton: false,
+          timer: 1500
+        });window.setTimeout(function(){location.reload()},1000)
+      },
+      error => {
+        this.errMsg = false
+        setTimeout(()=>{ this.errMsg = true}, 2000);
       });
   }
   }
