@@ -3,8 +3,6 @@ import { FormControl } from '@angular/forms';
 export class UsernameValidator {
     static cannotContainSpace(control: AbstractControl) : ValidationErrors | null
     {
-
-
         if((control.value as string).startsWith(' ')){
             return {cannotContainSpace: true}
         }

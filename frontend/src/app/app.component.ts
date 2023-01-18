@@ -6,6 +6,8 @@ import { AuthService } from './service/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  currentDate = new Date();
+  
   constructor(public authService: AuthService) { }
   logout() {
     this.authService.doLogout()

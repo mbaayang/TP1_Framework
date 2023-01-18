@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt')
 const uniqueValidator = require('mongoose-unique-validator');
 
 let userSchema = new Schema({
@@ -13,9 +14,9 @@ let userSchema = new Schema({
     matricule: { type: String, required:true }
 }, {timestamps: true},
 {
-    collection: 'personnes'
+    collection: 'users'
 })
 
 userSchema.plugin(uniqueValidator, { message: 'Compte déjà existant !' });
 
-module.exports = mongoose.model('personnes', userSchema)
+module.exports = mongoose.model('users', userSchema)

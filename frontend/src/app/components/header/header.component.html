@@ -4,12 +4,12 @@
       <div class="infos">
           <div>
               <div class="profil d-flex justify-center">
-                  <img [src]="currentUser.imageUrl" class="img-fluid rounded-circle"  alt="">
+                  <img [src]="this.currentUser.imageUrl" class="img-fluid rounded-circle"  alt="">
               </div>
           </div>
           <div class="nom">
             <h3>{{ this.currentUser.prenom }} {{ this.currentUser.nom }}</h3>
-            <p>Matricule</p>
+            <p>{{this.currentUser.matricule}}</p>
           </div>
       </div>
       <div class="end">

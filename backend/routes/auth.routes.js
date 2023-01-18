@@ -8,7 +8,7 @@ const { check, validationResult } = require('express-validator')
 mongoose = require('mongoose')
 multer = require('multer')
 
-// Multer File upload settings
+// Paramètres de téléchargement de fichiers Multer
 const DIR = './images/'
 
 const storage = multer.diskStorage({
@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
   },
 })
 
-// Multer Mime Type Validation
+// Validation du type mime de Multer
 var upload = multer({
   storage: storage,
   limits: {
@@ -36,12 +36,12 @@ var upload = multer({
       cb(null, true)
     } else {
       cb(null, false)
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'))
+      return cb(new Error('Seulement, les formats .png, .jpg and .jpeg sont autorisés!'))
     }
   },
 })
 
-// Sign-up
+// Inscription
 router.post(
   '/register-user', upload.single('imageUrl'),
   [
@@ -53,7 +53,7 @@ router.post(
       .isEmpty()
       .isLength({ min: 8, max: 16 }),
   ],
-  (req, res, next) => {
+  authorize,(req, res, next) => {
     const errors = validationResult(req)
     console.log(req.body)
 
@@ -67,7 +67,7 @@ router.post(
           role: req.body.role,
           password: hash,
           etat: req.body.etat,
-          imageUrl: url + '/images/' + req.file.filename,
+          imageUrl: url + '/images/' + req.file?.filename,
           matricule: req.body.matricule,
         })
         user
@@ -89,7 +89,7 @@ router.post(
 )
 
 
-// Sign-in
+// Connection
 router.post('/signin', (req, res, next) => {
   let getUser
   userSchema
@@ -133,13 +133,13 @@ router.post('/signin', (req, res, next) => {
     })
     .catch((err) => {
       return res.status(401).json({
-        message: 'Authentication failed',
+        message: 'Authentification échouée',
       })
     })
 })
 
-// Get Users
-router.route('/').get((req, res, next) => {
+// Récupérer les données de tous les utilisateurs
+router.route('/').get(authorize, (req, res, next) => {
   userSchema.find((error, response)=> {
     if (error) {
       return next(error)
@@ -150,8 +150,8 @@ router.route('/').get((req, res, next) => {
 })
 
 
-// Get User
-router.route('/read-user/:id').get((req, res) => {
+// Récupérer les données d'un utilisateur 
+router.route('/read-user/:id').get(authorize, (req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
       return next(error);
@@ -164,7 +164,7 @@ router.route('/read-user/:id').get((req, res) => {
 
 
 
-// Get Single User
+// Récupérer les données d'un utilisateur avec token
 router.route('/user-profile/:id').get(authorize, (req, res, next) => {
   userSchema.findById(req.params.id, (error, data) => {
     if (error) {
@@ -177,8 +177,9 @@ router.route('/user-profile/:id').get(authorize, (req, res, next) => {
   })
 })
 
-// Update User
-router.route('/update-user/:id').put((req, res, next) => {
+// Modifier un utilisateur
+router.route('/update-user/:id').put(authorize, (req, res, next) => {
+  console.log(req.body)
   userSchema.findByIdAndUpdate(
     req.params.id,
     {
@@ -188,15 +189,36 @@ router.route('/update-user/:id').put((req, res, next) => {
       if (error) {
         return next(error)
       } else {
-        res.json(data)
+        res.status(200).json({msg: data,})
         console.log('Modification réussie !')
       }
     },
   )
 })
 
-// Delete User
-router.route('/delete-user/:id').delete((req, res, next) => {
+// Modification mot de passe
+router.route('/update/:id').put(authorize, async(req, res) => {
+  try {
+  const id = req.params.id;
+  const updatedData = req.body;
+  const options = { new: true };
+  
+      updatedData.password
+      const hash = await bcrypt.hash(updatedData.password, 10);
+      updatedData.password = hash;
+      
+              const result = await userSchema.findByIdAndUpdate(
+              id, updatedData, options);
+            return  res.send(result);        
+  }
+  catch (error) {
+      res.status(400).json({ message: error.message })
+  }
+  })
+
+
+// Supprimer un utilisateur
+router.route('/delete-user/:id').delete(authorize, (req, res, next) => {
   userSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
       return next(error)
@@ -204,6 +226,7 @@ router.route('/delete-user/:id').delete((req, res, next) => {
       res.status(200).json({
         msg: data,
       })
+      console.log('Suppression réussie !')
     }
   })
 })

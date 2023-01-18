@@ -45,4 +45,4 @@ import { ModifierComponent } from './components/modifier/modifier.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+ export class AppModule { }

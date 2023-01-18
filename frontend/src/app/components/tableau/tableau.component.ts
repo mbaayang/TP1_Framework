@@ -25,12 +25,13 @@ export class TableauComponent implements OnInit {
 
 
   constructor(public authService: AuthService,private activatedRoute: ActivatedRoute,private router: Router,private ngZone: NgZone,public formBuilder: FormBuilder) {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    /* let id = this.activatedRoute.snapshot.paramMap.get('id'); */
+    let id = localStorage.getItem('id')?.replaceAll('"', '');
     this.authService.getUserProfile(id).subscribe((res) => {
       this.currentUser = res.msg;
     });
 
-    
+
 
     this.updateForm = this.formBuilder.group({
       prenom: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
@@ -51,9 +52,9 @@ export class TableauComponent implements OnInit {
     );
   }
 
-
+// Modification des rôles l'utilisateur entre Administrateur et Utilisateur
   changeRole=(id:any,role:any)=> {
-    role == "Administrateur" ? role ="Utilisateur": role = "Administrateur"
+    role == "Administrateur" ? role = "Utilisateur": role = "Administrateur"
     const user ={
      role : role
     }
@@ -63,6 +64,7 @@ export class TableauComponent implements OnInit {
       });
    }
 
+// Modification des etats de l'utilisateur entre true et false
    archiver=(id:any,etat:any)=> {
     etat == false ? etat =true: etat = false
     const user ={
@@ -86,6 +88,8 @@ export class TableauComponent implements OnInit {
     })
    }
 
+// Récupération du prénom, du nom et de l'email d'un utilisateur
+
    getUserData(id:any,prenom:any,nom:any,email:any){
 
     this.updateForm = this.formBuilder.group({
@@ -97,9 +101,11 @@ export class TableauComponent implements OnInit {
     console.log(id)
   }
 
-   onUpdate(){
-    const id =  this.updateForm.value.id;
- const user ={
+// Modification du prénom, du nom ou de l'email d'un utilisateur
+
+onUpdate(){
+  const id =  this.updateForm.value.id;
+  const user ={
   prenom: this.updateForm.value.prenom,
   nom : this.updateForm.value.nom,
   email: this.updateForm.value.email
@@ -111,8 +117,9 @@ export class TableauComponent implements OnInit {
     this.authService.updateUser(id, user).subscribe(
       data=>{
         this.ngOnInit();
+        /* Swal.fire('Modification réussie !'); */
+        /* setTimeout(()=>{Swal.fire('Modification réussie !')}, 5000); */
         Swal.fire('Modification réussie !');
-        setTimeout(()=>{Swal.fire('Modification réussie !')}, 5000);
         window.location.reload();
       });
   }

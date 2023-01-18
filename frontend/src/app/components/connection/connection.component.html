@@ -1,4 +1,5 @@
-   <body>  
+ <!-- Formulaire de connection -->
+   <body>
     <div class="row g-3 my-5">
         <form class="row g-3 d-flex justify-content-center bg-light" [formGroup]="registerForm" (ngSubmit)="loginUser()" >
           <ng-container *ngIf="this.errMsg">
@@ -7,7 +8,7 @@
           <h1 class="text-center">Connexion</h1>
           <div class="profil justify-center">
             <img class="img-fluid rounded-circle" [src]="imageUrl" alt="">
-          </div>           
+          </div>
           <div class="form-group inputs">
             <label for="email">Email Address</label>
             <input [ngClass]="{'is-invalid':submitted && registerForm.controls['email'].errors}" formControlName="email" type="email" class="form-control">

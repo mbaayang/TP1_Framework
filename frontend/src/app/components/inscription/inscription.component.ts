@@ -6,6 +6,8 @@ import { UsernameValidator } from 'src/app/username.validator';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { MustMatch } from 'src/app/MustMatch';
+/* import * as bcrypt from 'bcrypt'; */
+
 
 @Component({
   selector: 'app-inscription',
@@ -42,7 +44,7 @@ export class InscriptionComponent implements OnInit {
 
   ngOnInit() {}
 
-  // Image Preview
+  // Aperçu de l'image
   uploadFile(event: any) {
 
     const file = event.target.files[0];
@@ -51,7 +53,7 @@ export class InscriptionComponent implements OnInit {
     });
     this.signupForm.get('imageUrl')?.updateValueAndValidity();
 
-    // File Preview
+    // Aperçu du fichier
     const reader = new FileReader();
     reader.onload = () => {
       this.preview = reader.result as string;
@@ -59,13 +61,15 @@ export class InscriptionComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-
+// Méthode d'inscription d'un utilisateur
   registerUser() {
     this.submitted = true;
     if(this.signupForm.invalid){
       return;
     }
     this.submitted=false
+  /* const salt = bcrypt.genSaltSync(10); */
+
     //générer matricule pour administrateur et utilisateur
     let matriculeGenerate;
     this.signupForm.value.role =="Administrateur" ? matriculeGenerate= "MAT"+(Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1))

@@ -8,4 +8,7 @@ export class User {
   etat!: boolean;
   imageUrl!: String;
   matricule!: String;
+  data!:{
+    _id: String;
+};
 }

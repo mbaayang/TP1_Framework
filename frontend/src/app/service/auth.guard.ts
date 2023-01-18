@@ -11,6 +11,8 @@ export class AuthGuard implements CanActivate {
     public authService: AuthService,
     public router: Router
   ) { }
+
+  // Méthode de limitation d'accès à l'application aux connéctés
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

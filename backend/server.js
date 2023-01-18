@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const api = require('./routes/auth.routes')
 
 mongoose
-  .connect('mongodb+srv://mbayang:mbayang07@cluster0.tzug7mq.mongodb.net/User?retryWrites=true&w=majority')
+  .connect('mongodb://localhost:27017/Users')
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -18,8 +18,7 @@ mongoose
 // Express settings
 const app = express()
 app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
+app.use(bodyParser.urlencoded({
     extended: false,
   }),
 )

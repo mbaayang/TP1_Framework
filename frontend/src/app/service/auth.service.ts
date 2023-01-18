@@ -41,6 +41,14 @@ updateUser(id: any, data: any): Observable<any> {
     .put(API_URL, data, { headers: this.headers })
     .pipe(catchError(this.handleError));
 }
+
+// UpdatePassword
+updatepass(id: any, data: any): Observable<any> {
+  let API_URL = `${this.endpoint}/update/${id}`;
+  return this.http
+    .put(API_URL, data, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+}
 // Delete
 deleteUser(id: any): Observable<any> {
   let API_URL = `${this.endpoint}/delete-user/${id}`;
@@ -69,11 +77,18 @@ deleteUser(id: any): Observable<any> {
   // Sign-in
   signIn(user: User) {
     return this.http
-      .post<any>(`${this.endpoint}/signin`, user)
+      .post<any>(`${this.endpoint}/signin`, user).pipe(map(user => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        console.log(user)
+        localStorage.setItem('id', user._id);
+        return user;
+      }));
+
   }
   getToken() {
     return localStorage.getItem('access_token');
   }
+
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
